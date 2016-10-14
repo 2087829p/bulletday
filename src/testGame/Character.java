@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Charecter {
+public class Character {
 	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
 	final int GROUND = 382;

@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 public class Enemy {
 	private int maxHealth, currentHealth, power, speedX, centerX, centerY;
 	private Background bg = MainClass.getBg1();
-	private Charecter robot = MainClass.getCharecter();
+	private Character robot = MainClass.getCharecter();
 	public Rectangle r = new Rectangle(0, 0, 0, 0);
 	public int health = 5;
 	private int movementSpeed;
@@ -18,15 +18,15 @@ public class Enemy {
 		speedX = bg.getSpeedX() * 5;
 		r.setBounds(centerX - 25, centerY - 25, 50, 60);
 
-		if (r.intersects(Charecter.yellowRed)) {
+		if (r.intersects(Character.yellowRed)) {
 			checkCollision();
 		}
 	}
 
 	private void checkCollision() {
-		if (r.intersects(Charecter.rect) || r.intersects(Charecter.rect2)
-				|| r.intersects(Charecter.rect3)
-				|| r.intersects(Charecter.rect4)) {
+		if (r.intersects(Character.rect) || r.intersects(Character.rect2)
+				|| r.intersects(Character.rect3)
+				|| r.intersects(Character.rect4)) {
 			System.out.println("collision");
 
 		}

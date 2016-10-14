@@ -30,7 +30,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			heliboy3, heliboy4, heliboy5;
 	private Graphics second;
 	private URL base;
-	private static Charecter robot;
+	private static Character robot;
 	public static Heli h1, h2;
 	private Animation anim, hanim;
 	private static Background bg1, bg2;
@@ -100,7 +100,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		robot = new Charecter();
+		robot = new Character();
 		// for (int i = 0; i < 200; i++) {
 		// for (int j = 0; j < 12; j++) {
 		// if (j == 11) {
@@ -154,7 +154,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if (i < line.length()) {
 					char ch = line.charAt(i);
 					System.out.println(line.charAt(i) + "is i ");
-					Tile t = new Tile(i, j, Character.getNumericValue(ch));
+					Tile t = new Tile(i, j, java.lang.Character.getNumericValue(ch));
 					tilearray.add(t);
 				}
 			}
@@ -361,7 +361,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		return bg2;
 	}
 
-	public static Charecter getCharecter() {
+	public static Character getCharecter() {
 		return robot;
 	}
 

@@ -8,7 +8,7 @@ public class Tile {
 	public Image tileImage;
 
 	private Background bg = MainClass.getBg1();
-	private Charecter robot = MainClass.getCharecter();
+	private Character robot = MainClass.getCharecter();
 	private Rectangle r;
 
 	public Tile(int x, int y, int typeInt) {
@@ -47,10 +47,10 @@ public class Tile {
 		speedX = bg.getSpeedX() * 5;
 		tileX += speedX;
 		r.setBounds(tileX, tileY, 40, 40);
-		if (r.intersects(Charecter.yellowRed) && type != 0) {
-			checkVerticalCollision(Charecter.rect, Charecter.rect2);
-			checkSideCollision(Charecter.rect3, Charecter.rect4,
-					Charecter.footleft, Charecter.footright);
+		if (r.intersects(Character.yellowRed) && type != 0) {
+			checkVerticalCollision(Character.rect, Character.rect2);
+			checkSideCollision(Character.rect3, Character.rect4,
+					Character.footleft, Character.footright);
 		}
 	}
 
