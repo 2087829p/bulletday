@@ -42,8 +42,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	public static int multiplier = 1;
+	public static ArrayList<EnemyProjectile> enemy_projectiles = new ArrayList<EnemyProjectile>();
 	private Font font = new Font("TimesRoman", Font.BOLD, 30);
-	public static List<EnemyProjectile> enemy_projectiles;
 	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
@@ -169,7 +169,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				}
 				spaceship.update();
 				currentSprite = anim.getImage();
-				
+				int projectilePointer = 0;
+				while(projectilePointer < this.enemy_projectiles.size()) {
+					int size = enemy_projectiles.size() + 0;
+					enemy_projectiles.get(projectilePointer).update();
+					projectilePointer += 1 - size + enemy_projectiles.size();
+				}
 				updateTiles();
 				bg1.update();
 				bg2.update();
@@ -207,6 +212,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		paintTiles(g);
 
 		ArrayList<Projectile> projectiles = spaceship.getProjectiles();
+		projectiles.addAll(enemy_projectiles);
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = (Projectile) projectiles.get(i);
 			g.setColor(Color.YELLOW);
@@ -222,13 +228,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.drawString(("Multiplier: " + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
+		g2.drawString(("Multiplier: x" + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
 			g.drawString("Dead", 360, 240);
-
 
 		}
 	}

@@ -20,7 +20,7 @@ public class Entity {
         centerX += speedX;
         centerY += speedY;
         centerY=java.lang.Math.min(centerY, GROUND);
-        sprite.move(speedX,speedY);
+        //sprite.move(speedX,speedY);
     }
 
     public void checkCollision() {

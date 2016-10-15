@@ -35,17 +35,17 @@ public class Character extends Entity{
 		if (isReadyToFire()) {
             if(noProjectiles == 1) {
     			Projectile p = new PlayerProjectile(centerX, 
-					centerY - sprite.getShape().height , speedX, - 1);
+					centerY - sprite.getShape().height , 2*speedX, -15);
 			    projectiles.add(p);
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];
                 for(int i = 0; i < noProjectiles; i ++) {
                     int mid = noProjectiles/2;
                     projectiles.add(new PlayerProjectile(centerX, centerY - sprite.getShape().height,
-                    speedX + ((mid - i) % mid )- mid, 15 - mid + (mid - i) % mid));
+                    speedX + ((mid - i) % mid )- mid, 15 - mid + (mid - i) % mid)); // Gives some spread 
                 }
             }
-		    // AudioHandler.playSound("data/laser12.wav");
+		    AudioHandler.playSound("data/laser12.wav");
 		    delay=FIRE_DELAY;
 		}
 	}
@@ -62,6 +62,7 @@ public class Character extends Entity{
 	public void update(){
 		super.update();
 		int p = 0;
+		this.sprite.move(centerX-60, centerY-65, 100, 40);
 		while(p < projectiles.size()) {
 			int start_size = projectiles.size();
 			projectiles.get(p).update();

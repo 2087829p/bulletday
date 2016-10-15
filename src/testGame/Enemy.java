@@ -10,8 +10,8 @@ public class Enemy extends Entity {
 	private final int DEFAULT_HEALTH=1;
 	int health;
 	private int speedX;
-	private int centerX;
-	private int centerY;
+	//private int centerX;
+	//private int centerY;
 	private int numOfBullets;
 	private int rateOfFire;
 	private int updateCount;
@@ -23,22 +23,23 @@ public class Enemy extends Entity {
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
 	    super(centerX, centerY, new EnemySprite(centerX,centerY));       
-		this.numOfBullets = numOfBullets;
+	    sprite.move(centerX, centerY, sprite.width, sprite.height);
+	    this.numOfBullets = numOfBullets;
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
 		this.updateCount = 0;
     	this.angle = new double[this.numOfBullets];
     	switch(numOfBullets){
     	case 1:
-    		angle[0] = 0;
+    		angle[0] = 3 * Math.PI / 2;
     		break;
     	case 2:
-    		angle[0] =  Math.PI/6;
-    		angle[1] = -(Math.PI/6);
+    		angle[0] =  (Math.PI/6) + 3 * Math.PI / 2;
+    		angle[1] = -(Math.PI/6) + 3 * Math.PI / 2;
     		break;
     	default:
 			for(int i = 0; i < numOfBullets; i ++) {
-				angle[i] = (i * 2 * Math.PI/numOfBullets); 
+				angle[i] = (i * 2 * Math.PI/numOfBullets) + 3 * Math.PI / 2; 
 			}
     	}
 		this.health=DEFAULT_HEALTH;
@@ -51,11 +52,11 @@ public class Enemy extends Entity {
 		follow();
 		centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
-		
 		speedX = bg.getSpeedX() * 5;
+		sprite.move(centerX, centerY, sprite.width, sprite.height);
 		if(updateCount % rateOfFire == 0) {
 			shoot();
-			updateCount = rateOfFire;
+			updateCount = 100 - rateOfFire;
 		}
 		updateCount --;
         if(collides(player)){
@@ -85,7 +86,7 @@ public class Enemy extends Entity {
     		EnemyProjectile bullet = new EnemyProjectile(this.centerX, this.centerY
     				, this.speedX + xSpeed.intValue(), 
     				  this.speedY + ySpeed.intValue());
-    		MainClass.projectiles.add(bullet);
+    		MainClass.enemy_projectiles.add(bullet);
     	}
     }
     
@@ -112,7 +113,7 @@ public class Enemy extends Entity {
 	
 	public void die() {
 		MainClass.enemies.remove(this);
-		//AudioHandler.playSound("data/explodemini.wav");
+		AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {
@@ -125,6 +126,7 @@ public class Enemy extends Entity {
 	public void setHealth(int amount){
 		health+=amount;
 		if(health<=0){
+			MainClass.addToScore();
 			die();
 		}
 	}
