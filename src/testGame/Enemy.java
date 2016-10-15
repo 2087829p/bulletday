@@ -31,12 +31,12 @@ public class Enemy extends Entity {
     		angle[0] = 0;
     		break;
     	case 2:
-    		angle[0] =  30;
-    		angle[1] = -30;
+    		angle[0] =  Math.PI/6;
+    		angle[1] = -(Math.PI/6);
     		break;
     	default:
 			for(int i = 0; i < numOfBullets; i ++) {
-				angle[i] = i * 360.0/numOfBullets; 
+				angle[i] = (i * 2 * Math.PI/numOfBullets); 
 			}
     	}
 		this.health=DEFAULT_HEALTH;
