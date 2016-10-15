@@ -39,6 +39,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
+	public static int multiplier = 1;
 	private Font font = new Font(null, Font.BOLD, 30);
 	public static List<EnemyProjectile> enemy_projectiles;
 	public static List<PlayerProjectile> player_projectiles;
@@ -229,7 +230,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		}
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(Integer.toString(score), 740, 30);
+		g.drawString(("Your score: " +  Integer.toString(score)), 160, 30);
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
@@ -327,8 +328,14 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			spaceship.shoot();
 		}
 	}
+
 	public static void setGameState(GameState newState){
 		state=newState;
+	}
+	
+	public static void addToScore(){
+		score = score + (multiplier * 10);
+		multiplier += 1;
 	}
 
 }
