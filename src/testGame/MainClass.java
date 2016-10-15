@@ -31,7 +31,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private Graphics second;
 	private URL base;
 	private static Character spaceship;
-	public static Heli h1, h2;
 	private Animation anim, hanim;
 	private static Background bg1, bg2;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
@@ -121,8 +120,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		h1 = new Heli(340, 360);
-		h2 = new Heli(700, 360);
 
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
@@ -206,8 +203,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 					}
 				}
 				updateTiles();
-				h1.update();
-				h2.update();
 				bg1.update();
 				bg2.update();
 				animate();
@@ -246,10 +241,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
 				spaceship.getCenterY() - 63, this);
-		g.drawImage(hanim.getImage(), h1.getCenterX() - 48,
-				h1.getCenterY() - 48, this);
-		g.drawImage(hanim.getImage(), h2.getCenterX() - 48,
-				h2.getCenterY() - 48, this);
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g.drawString(Integer.toString(score), 740, 30);
