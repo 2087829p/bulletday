@@ -45,7 +45,7 @@ public class Character extends Entity{
                     speedX + ((mid - i) % mid )- mid, 15 - mid + (mid - i) % mid));
                 }
             }
-		    // AudioHandler.playSound("data/laser12.wav");
+		    AudioHandler.playSound("data/laser12.wav");
 		    delay=FIRE_DELAY;
 		}
 	}
@@ -62,6 +62,7 @@ public class Character extends Entity{
 	public void update(){
 		super.update();
 		int p = 0;
+		this.sprite.move(centerX-60, centerY-65, 100, 40);
 		while(p < projectiles.size()) {
 			int start_size = projectiles.size();
 			projectiles.get(p).update();

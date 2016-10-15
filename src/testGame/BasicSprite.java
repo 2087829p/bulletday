@@ -12,14 +12,17 @@ public class BasicSprite {
     private int y;
     public Rectangle shape;
     private BufferedImage sprite;
-
+    public int height,width;
+    
     public BasicSprite(int x, int y, String fn) {
         try {
             sprite = ImageIO.read(new File(fn));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        shape = new Rectangle(sprite.getWidth(), sprite.getHeight());
+        height=sprite.getHeight();
+        width=sprite.getWidth();
+        shape = new Rectangle(x-60,y-50,sprite.getWidth(), sprite.getHeight());
         this.x = x;
         this.y = y;
     }
@@ -36,7 +39,7 @@ public class BasicSprite {
         return b.getShape().intersects(shape);
     }
 
-    public void move(int x, int y) {
-        shape.setLocation(this.x + x,this.y + y);
+    public void move(int x, int y,int w,int h) {
+        shape.setRect( x, y,w,h);
     }
 }
