@@ -84,7 +84,7 @@ class WavPlayer implements Runnable,LineListener{
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
-			}			
+			}				        
 			audioClip.close();
 		} catch (UnsupportedAudioFileException ex) {
 			System.out.println("The specified audio file is not supported.");
