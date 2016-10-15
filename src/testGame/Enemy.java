@@ -31,15 +31,15 @@ public class Enemy extends Entity {
     	this.angle = new double[this.numOfBullets];
     	switch(numOfBullets){
     	case 1:
-    		angle[0] = 0;
+    		angle[0] = 3 * Math.PI / 2;
     		break;
     	case 2:
-    		angle[0] =  Math.PI/6;
-    		angle[1] = -(Math.PI/6);
+    		angle[0] =  (Math.PI/6) + 3 * Math.PI / 2;
+    		angle[1] = -(Math.PI/6) + 3 * Math.PI / 2;
     		break;
     	default:
 			for(int i = 0; i < numOfBullets; i ++) {
-				angle[i] = (i * 2 * Math.PI/numOfBullets); 
+				angle[i] = (i * 2 * Math.PI/numOfBullets) + 3 * Math.PI / 2; 
 			}
     	}
 		this.health=DEFAULT_HEALTH;
@@ -54,10 +54,9 @@ public class Enemy extends Entity {
 			this.die();
 		}
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
-		
-		if(updateCount % rateOfFire == 0) {
+		if(updateCount == 0) {
 			shoot();
-			updateCount = rateOfFire;
+			updateCount = 100 - rateOfFire;
 		}
 		updateCount --;
         if(collides(player)){
@@ -87,7 +86,7 @@ public class Enemy extends Entity {
     		EnemyProjectile bullet = new EnemyProjectile(this.centerX, this.centerY
     				, this.speedX + xSpeed.intValue(), 
     				  this.speedY + ySpeed.intValue());
-    		MainClass.projectiles.add(bullet);
+    		MainClass.enemy_projectiles.add(bullet);
     	}
     }
     

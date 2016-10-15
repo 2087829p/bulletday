@@ -41,7 +41,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static int score = 0;
 	public static int multiplier = 1;
 	private Font font = new Font(null, Font.BOLD, 30);
-	public static List<EnemyProjectile> enemy_projectiles;
+	public static ArrayList<EnemyProjectile> enemy_projectiles = new ArrayList<EnemyProjectile>();
 	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
@@ -179,7 +179,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				}
 				spaceship.update();
 				currentSprite = anim.getImage();
-				
+				int projectilePointer = 0;
+				while(projectilePointer < this.enemy_projectiles.size()) {
+					int size = enemy_projectiles.size() + 0;
+					enemy_projectiles.get(projectilePointer).update();
+					projectilePointer += 1 - size + enemy_projectiles.size();
+				}
 				updateTiles();
 				bg1.update();
 				bg2.update();
@@ -217,6 +222,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		paintTiles(g);
 
 		ArrayList<Projectile> projectiles = spaceship.getProjectiles();
+		projectiles.addAll(enemy_projectiles);
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = (Projectile) projectiles.get(i);
 			g.setColor(Color.YELLOW);

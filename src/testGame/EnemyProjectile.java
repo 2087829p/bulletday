@@ -16,6 +16,6 @@ public class EnemyProjectile extends Projectile{
 	@Override
 	public void die() {
 		super.die();
-		MainClass.projectiles.remove(this);
+		MainClass.enemy_projectiles.remove(this);
 	}
 }
