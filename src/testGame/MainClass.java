@@ -85,7 +85,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		anim.addFrame(character3, 50);
 		anim.addFrame(character2, 50);
 
-		hanim = new Animation();
+		hanim = new Animation();   
 		hanim.addFrame(heliboy, 100);
 		hanim.addFrame(heliboy2, 100);
 		hanim.addFrame(heliboy3, 100);
