@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 import framework.Animation;
 
@@ -35,7 +36,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private static Background bg1, bg2;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
 			tilegrassRight, tiledirt;
-
+	public static List<Enemy> enemies=new ArrayList<Enemy>();
+	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	private Font font = new Font(null, Font.BOLD, 30);
