@@ -31,18 +31,21 @@ public class Character extends Entity{
 	
 	public void shoot() {
 		if (readyToFire) {
-			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
-					centerY + sprite.getShape().height , speedX, speedY + 10);
+			Projectile p = new PlayerProjectile(centerX, 
+					centerY - sprite.getShape().height , speedX, -speedY - 10);
 			projectiles.add(p);
-			AudioHandler.playSound("data/laser12.wav");
+			//AudioHandler.playSound("data/laser12.wav");
 		}
 	}
 	
 	@Override
 	public void update(){
 		super.update();
-		for(Projectile p : projectiles) {
-			p.update();
+		int p = 0;
+		while(p < projectiles.size()) {
+			int start_size = projectiles.size();
+			projectiles.get(p).update();
+			p += 1 - start_size + projectiles.size();
 		}
 	}
 	
