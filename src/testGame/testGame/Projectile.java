@@ -4,15 +4,16 @@ import java.awt.Rectangle;
 
 public class Projectile {
 
-	private int x, y, speedX;
+	private int x, y, speedX, speedY;
 	private boolean visible;
 
 	private Rectangle r;
 
-	public Projectile(int startX, int startY) {
+	public Projectile(int startX, int startY, int sX, int sY) {
 		x = startX;
 		y = startY;
-		speedX = 7;
+		speedX = sX;
+		speedY = sY;
 		visible = true;
 		r = new Rectangle(0, 0, 0, 0);
 	}
@@ -20,13 +21,11 @@ public class Projectile {
 	public void update() {
 		x += speedX;
 		r.setBounds(x, y, 10, 5);
-		if (x > 800) {
+		if (x > 800 || x < 0 || y > 480 || y < 0) {
 			visible = false;
 			r = null;
 		}
-		if (x < 800) {
-			checkCollision();
-		}
+
 	}
 
 	private void checkCollision() {
