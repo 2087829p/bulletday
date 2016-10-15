@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import framework.Animation;
@@ -169,20 +170,20 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		if (state == GameState.Running) {
 			int wave_counter = 0;
 			while (true) {
-				if(wave_counter == 0) {
+				if(wave_counter < 0) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
 						enemies_in_scene.add(e);
 					}
 				}
-				wave_counter = wave_counter ++ % 30;
+				wave_counter = wave_counter + 1 % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
 				for (Projectile p : projectiles) {
 					if (p.isVisible()) {
 						p.update();
 					} else {
-						projectiles.remove(p);
+						//projectiles.remove(p);
 					}
 				}
 				updateTiles();

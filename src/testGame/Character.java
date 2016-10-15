@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import framework.AudioHandler;
 import testGame.MainClass.GameState;
 
 public class Character extends Entity{
@@ -33,6 +34,7 @@ public class Character extends Entity{
 			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
 					centerY + sprite.getShape().height , speedX, speedY + 10);
 			projectiles.add(p);
+			AudioHandler.playSound("data/laser12.wav");
 		}
 	}
 	
