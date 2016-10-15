@@ -273,8 +273,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
-			g.drawString("Dead", 360, 240);
-
+			g.drawString("Dead", 320, 30);
+			g.drawString("Score Board", 320, 60);
+			scoreBoard.addScore(score);
+			scoreBoard.saveScores();
+			String top10 = scoreBoard.getN(10);
+			g.drawString(top10, 320, 100);
 
 		}
 	}
