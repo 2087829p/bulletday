@@ -105,7 +105,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AudioHandler.playSound("data/orbital_colossus.wav");
+		AudioHandler.playBackground("data/orbital_colossus.wav");
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
 		// super.start();
@@ -192,9 +192,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void run() {
-		if (state == GameState.Running) {
-			while (true) {
-				if(enemies.size() == 0) {
+		while(state == GameState.Running) {
+			  if(enemies.size() == 0) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
 						BasicSprite enemySprite = e.getSprite();
@@ -230,7 +229,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if (spaceship.getCenterY() > 640) {
 					spaceship.setCenterY(640);
 				}
-			}
 		}
 	}
 	
@@ -275,9 +273,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
-			g.drawString("Dead", 360, 240);
-
-
+			g.drawString("Dead", WIDTH/2, 240);
+		}else{
+			
 		}
 	}
 
@@ -371,6 +369,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	public static void setGameState(GameState newState){
 		state=newState;
+		if(state==GameState.Dead){
+			AudioHandler.stopBackgroundMusic();
+		}
 	}
 	
 	public static void addToScore(){

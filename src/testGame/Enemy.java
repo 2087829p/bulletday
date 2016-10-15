@@ -71,6 +71,10 @@ public class Enemy extends Entity {
 		if(centerY + this.sprite.height > 640){
         	die();
         }
+		if(sprite.collides(MainClass.getCharacter().sprite)){
+			MainClass.getCharacter().setHealth(-1);
+			die();
+		}
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = 100 - rateOfFire;
