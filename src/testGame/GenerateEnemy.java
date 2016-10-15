@@ -1,7 +1,7 @@
 package testGame;
 
 import java.util.Random;
-import java.Math;
+import java.lang.Math;
 
 public class GenerateEnemy {
     public static Random rng;
@@ -53,8 +53,10 @@ public class GenerateEnemy {
         
         for(int i = 0; i < count; i ++) {
             
-            Enemy[i] = new Enemy(); // TODO set up constructor
+            ret[i] = new Enemy(); // TODO set up constructor
         }
+        
+        return ret;
     }
 
     // Generates a single enemy

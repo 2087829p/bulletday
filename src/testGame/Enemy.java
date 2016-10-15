@@ -13,12 +13,24 @@ public class Enemy {
 	private Character enemy = MainClass.getCharacter();
 	public Rectangle r = new Rectangle(0, 0, 0, 0);
 	private int movementSpeed;
-
+	
+	public void Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
+			int movementSpeed){
+	
+		this.centerX = centerX;
+		this.centerY = centerY;
+		this.numOfBullets = numOfBullets;
+		this.rateOfFire = rateOfFire;
+		this.movementSpeed = movementSpeed;
+		
+	}
+	
 	// Behavioral Methods
 	public void update() {
 		follow();
 		centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
+		
 		speedX = bg.getSpeedX() * 5;
 		r.setBounds(centerX - 25, centerY - 25, 50, 60);
 
