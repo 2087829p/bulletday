@@ -20,6 +20,7 @@ public class Projectile {
 
 	public void update() {
 		x += speedX;
+		x += speedY;
 		r.setBounds(x, y, 10, 5);
 		if (x > 800 || x < 0 || y > 480 || y < 0) {
 			visible = false;
