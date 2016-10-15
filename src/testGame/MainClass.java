@@ -27,8 +27,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
-			characterDown, characterJumped, background, heliboy, heliboy2,
-			heliboy3, heliboy4, heliboy5;
+			background, heliboy;
 	private Graphics second;
 	private URL base;
 	private static Character spaceship;
@@ -44,12 +43,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void init() {
-		setSize(800, 480);
+		setSize(480, 800);
 		setBackground(Color.BLACK);
 		setFocusable(true);
 		addKeyListener(this);
 		Frame f = (Frame) this.getParent().getParent();
-		f.setTitle("Game Test");
+		f.setTitle("Bulletday");
 		
 		try {
 			base = getDocumentBase();
@@ -58,18 +57,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		}
 		
 		// Image Setups
+		
 		character = getImage(base, "data/character.png");
 		character2 = getImage(base, "data/character2.png");
 		character3 = getImage(base, "data/character3.png");
 
 		heliboy = getImage(base, "data/heliboy.png");
-		heliboy2 = getImage(base, "data/heliboy2.png");
-		heliboy3 = getImage(base, "data/heliboy3.png");
-		heliboy4 = getImage(base, "data/heliboy4.png");
-		heliboy5 = getImage(base, "data/heliboy5.png");
-
-		characterDown = getImage(base, "data/down.png");
-		characterJumped = getImage(base, "data/jumped.png");
 
 		background = getImage(base, "data/background.png");
 		// tiledirt = getImage(base, "data/tiledirt.png");
@@ -81,20 +74,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		tilegrassRight = getImage(base, "data/tilegrassright.png");
 
 		anim = new Animation();
-		anim.addFrame(character, 1250);
-		anim.addFrame(character2, 50);
-		anim.addFrame(character3, 50);
-		anim.addFrame(character2, 50);
-
+		
 		hanim = new Animation();   
 		hanim.addFrame(heliboy, 100);
-		hanim.addFrame(heliboy2, 100);
-		hanim.addFrame(heliboy3, 100);
-		hanim.addFrame(heliboy4, 100);
-		hanim.addFrame(heliboy5, 100);
-		hanim.addFrame(heliboy4, 100);
-		hanim.addFrame(heliboy3, 100);
-		hanim.addFrame(heliboy2, 100);
 
 		currentSprite = anim.getImage();
 	}
@@ -104,18 +86,11 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
 		spaceship = new Character(380, 400);
-		// for (int i = 0; i < 200; i++) {
-		// for (int j = 0; j < 12; j++) {
-		// if (j == 11) {
-		// Tile t = new Tile(i, j, 2);
-		// tilearray.add(t);
-		// }
-		// if (j == 10) {
-		// Tile t = new Tile(i, j, 1);
-		// tilearray.add(t);
-		// }
-		// }
-		// }
+		BasicSprite characterUFO = spaceship.getSprite();
+		Image characterUFOImage = characterUFO.getSprite();
+		anim.addFrame(characterUFOImage, 100);
+		currentSprite = anim.getImage();
+		
 		try {
 			loadMap("data/map1.txt");
 		} catch (IOException e) {

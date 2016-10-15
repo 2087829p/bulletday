@@ -16,6 +16,7 @@ public class Character extends Entity{
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private static Background bg1 = MainClass.getBg1();
 	private static Background bg2 = MainClass.getBg2();
+	
 	public Character(int centerX, int centerY) {
         super(centerX, centerY, new CharacterSprite(centerX, centerY));
     }
