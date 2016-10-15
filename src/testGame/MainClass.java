@@ -22,7 +22,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
-	public static ArrayList<Projectile> projectiles;
+	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
