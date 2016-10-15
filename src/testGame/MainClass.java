@@ -44,7 +44,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
-		setSize(480, 800);
+		setSize(480, 640);
 		setBackground(Color.BLACK);
 		setFocusable(true);
 		addKeyListener(this);
@@ -124,7 +124,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			}
 		}
 		height = lines.size();
-		for (int j = 0; j < 12; j++) {
+		for (int j = 0; j < height; j++) {
 			String line = (String) lines.get(j);
 			for (int i = 0; i < width; i++) {
 				
@@ -196,8 +196,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (spaceship.getCenterY() > 500) {
-					state = GameState.Dead;
+				if (spaceship.getCenterY() > 640) {
+					spaceship.setCenterY(640);
 				}
 			}
 		}
