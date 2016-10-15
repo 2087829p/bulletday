@@ -128,6 +128,7 @@ public class Enemy extends Entity {
 		health+=amount;
 		if(health<=0){
 			die();
+			MainClass.addToScore();
 		}
 	}
 }
