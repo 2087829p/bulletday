@@ -25,10 +25,20 @@ public class Character extends Entity{
 	
 	public void shoot() {
 		if (readyToFire) {
-			Projectile p = new PlayerProjectile(centerX + 50, centerY - 25, 10, 0);
+			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
+					centerY + sprite.getShape().height , speedX, speedY + 10);
 			projectiles.add(p);
 		}
 	}
+	
+	@Override
+	public void update(){
+		super.update();
+		for(Projectile p : projectiles) {
+			p.update();
+		}
+	}
+	
 	public void setHealth(int health){
 		this.health+=health;
 		if(this.health<=0){

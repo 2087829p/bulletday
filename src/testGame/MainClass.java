@@ -22,9 +22,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
-
+	public static ArrayList<Projectile> projectiles;
 	static GameState state = GameState.Running;
-	
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
 			characterDown, characterJumped, background, heliboy, heliboy2,
@@ -195,8 +194,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			while (true) {
 				spaceship.update();
 				currentSprite = anim.getImage();
-				
-				ArrayList<Projectile> projectiles = spaceship.getProjectiles();
 				for (int i = 0; i < projectiles.size(); i++) {
 					Projectile p = (Projectile) projectiles.get(i);
 					if (p.isVisible()) {
