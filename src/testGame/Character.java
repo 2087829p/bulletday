@@ -8,13 +8,15 @@ import testGame.MainClass.GameState;
 
 public class Character extends Entity{
 	private final int DEFAULT_PLAYER_HEALTH=3;
-	final int MOVESPEED = 5;	
+	private int movespeed = 5;	
 	int health;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingForward = false;
 	private boolean movingBack = false;
 	private boolean readyToFire = true;
+	private static int damage = 1;
+	private static int projNum = 1;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	//private static Background bg1 = MainClass.getBg1();
 	//private static Background bg2 = MainClass.getBg2();
@@ -60,19 +62,19 @@ public class Character extends Entity{
 	}
 	
 	public void moveRight() {
-		speedX = MOVESPEED;
+		speedX = movespeed;
 	}
 
 	public void moveLeft() {
-		speedX = -MOVESPEED;
+		speedX = -movespeed;
 	}
 	
 	public void moveForward() {
-		speedY = -MOVESPEED;
+		speedY = -movespeed;
 	}
 	
 	public void moveBack() {
-		speedY = MOVESPEED;
+		speedY = movespeed;
 	}
 
 	public void stopRight() {
@@ -151,6 +153,34 @@ public class Character extends Entity{
 
 	public void setMovingForward(boolean movingForward) {
 		this.movingForward = movingForward;		
+	}
+	
+	public int getDamage(){
+		return damage;
+	}
+	
+	public void incDamage(){
+		damage++;
+	}
+	
+	public int getProjNum(){
+		return projNum;
+	}
+	
+	public void incProjNum(){
+		if(projNum < 5){
+			projNum = projNum + 2;
+		}
+	}
+	
+	public int getSpeed(){
+		return movespeed;
+	}
+	
+	public void incSpeed(){
+		if(movespeed < 10){
+			movespeed++;
+		}
 	}
 
 }
