@@ -5,16 +5,15 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class Character {
-	final int JUMPSPEED = -15;
 	final int MOVESPEED = 5;
 	final int GROUND = 382;
 
 	private int centerX = 100;
 	private int centerY = 377;
-	private boolean jumped = false;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
-	private boolean ducked = false;
+	private boolean movingForward = false;
+	private boolean movingBack = false;
 	private boolean readyToFire = true;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private static Background bg1 = MainClass.getBg1();
@@ -22,6 +21,7 @@ public class Character {
 
 	private int speedX = 0;
 	private int speedY = 0;
+	
 	public static Rectangle rect = new Rectangle(0, 0, 0, 0);
 	public static Rectangle rect2 = new Rectangle(0, 0, 0, 0);
 	public static Rectangle rect3 = new Rectangle(0, 0, 0, 0);
@@ -53,18 +53,6 @@ public class Character {
 		// Updates Y Position
 		centerY += speedY;	
 
-		// Handles Jumping
-		if (jumped == true||centerY<GROUND) {
-			speedY += 1;
-		if (centerY + speedY >= GROUND) {
-			centerY = GROUND;
-			speedY = 0;
-			jumped = false;
-		 }
-		}
-		if (speedY > 3){
-			jumped = true;
-		}
 		// Prevents going beyond X coordinate of 0
 		if (centerX + speedX <= 60) {
 			centerX = 61;
@@ -90,15 +78,19 @@ public class Character {
 	}
 
 	public void moveRight() {
-		if (ducked == false) {
-			speedX = MOVESPEED;
-		}
+		speedX = MOVESPEED;
 	}
 
 	public void moveLeft() {
-		if (ducked == false) {
-			speedX = -MOVESPEED;
-		}
+		speedX = -MOVESPEED;
+	}
+	
+	public void moveForward() {
+		speedY = -MOVESPEED;
+	}
+	
+	public void moveBack() {
+		speedY = MOVESPEED;
 	}
 
 	public void stopRight() {
@@ -110,10 +102,24 @@ public class Character {
 		setMovingLeft(false);
 		stop();
 	}
+	
+	public void stopForward() {
+		setMovingForward(false);
+		stop();
+	}
+	
+	public void stopBack() {
+		setMovingBack(false);
+		stop();
+	}
 
 	private void stop() {
 		if (isMovingRight() == false && isMovingLeft() == false) {
 			speedX = 0;
+		}
+		
+		if(isMovingBack() == false && isMovingForward() == false) {
+			speedY = 0;
 		}
 
 		if (isMovingRight() == false && isMovingLeft() == true) {
@@ -123,15 +129,6 @@ public class Character {
 		if (isMovingRight() == true && isMovingLeft() == false) {
 			moveRight();
 		}
-
-	}
-
-	public void jump() {
-		if (jumped == false) {
-			speedY = JUMPSPEED;
-			jumped = true;
-		}
-
 	}
 
 	public boolean isReadyToFire() {
@@ -150,10 +147,6 @@ public class Character {
 		return centerY;
 	}
 
-	public boolean isJumped() {
-		return jumped;
-	}
-
 	public int getSpeedX() {
 		return speedX;
 	}
@@ -170,10 +163,6 @@ public class Character {
 		this.centerY = centerY;
 	}
 
-	public void setJumped(boolean jumped) {
-		this.jumped = jumped;
-	}
-
 	public void setSpeedX(int speedX) {
 		this.speedX = speedX;
 	}
@@ -182,16 +171,16 @@ public class Character {
 		this.speedY = speedY;
 	}
 
-	public boolean isDucked() {
-		return ducked;
-	}
-
-	public void setDucked(boolean ducked) {
-		this.ducked = ducked;
-	}
-
 	public boolean isMovingRight() {
 		return movingRight;
+	}
+	
+	private boolean isMovingForward() {
+		return movingForward;
+	}
+	
+	private boolean isMovingBack() {
+		return movingBack;
 	}
 
 	public void setMovingRight(boolean movingRight) {
@@ -205,4 +194,13 @@ public class Character {
 	public void setMovingLeft(boolean movingLeft) {
 		this.movingLeft = movingLeft;
 	}
+
+	public void setMovingBack(boolean movingBack) {
+		this.movingBack = movingBack;
+	}
+
+	public void setMovingForward(boolean movingForward) {
+		this.movingForward = movingForward;		
+	}
+
 }
