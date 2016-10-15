@@ -24,9 +24,7 @@ public class GenerateEnemy {
     }
     // Generate a group of enemies
     public static Enemy[] group_enemy(int difficulty) {
-        if(rng == null) {
-            rng = new Random();
-        }
+        if(rng == null) {}
         int count = rng.nextInt(Math.min(difficulty, 6))+1;
         int power = difficulty/count;
         int bullets = generate_num(power);

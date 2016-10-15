@@ -37,7 +37,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			tilegrassRight, tiledirt;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
-	public static List<PowerUp> powerUpList=new ArrayList<PowerUp>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	private Font font = new Font(null, Font.BOLD, 30);
@@ -106,7 +105,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	}
 
 	private void loadMap(String filename) throws IOException {
-		ArrayList lines = new ArrayList();
+		ArrayList<String> lines = new ArrayList<String>();
 		int width = 0;
 		int height = 0;
 		BufferedReader reader = new BufferedReader(new FileReader(filename));
@@ -176,16 +175,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 						enemies_in_scene.add(e);
 					}
 				}
-				wave_counter = wave_counter + 1 % 30;
+				wave_counter = wave_counter ++ % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
-				for (Projectile p : projectiles) {
-					if (p.isVisible()) {
-						p.update();
-					} else {
-						//projectiles.remove(p);
-					}
-				}
+				
 				updateTiles();
 				bg1.update();
 				bg2.update();
@@ -253,7 +246,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.drawImage(t.getTileImage(), t.getTileX(), t.getTileY(), this);
 		}
 	}
-
+	
 	@Override
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
@@ -323,8 +316,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void keyTyped(KeyEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if(arg0.getKeyCode()==KeyEvent.VK_SPACE){
+			spaceship.shoot();
+		}
 	}
 	public static void setGameState(GameState newState){
 		state=newState;
