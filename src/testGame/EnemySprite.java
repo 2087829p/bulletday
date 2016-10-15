@@ -3,7 +3,7 @@ package testGame;
 import java.util.Random;
 
 public class EnemySprite extends BasicSprite{
-    public static final String[] FN = {"data/heliboy.png"};
+    public static final String[] FN = {"data/enemy.PNG"};
     static Random randomSprite = new Random();
     
     public EnemySprite(int x, int y) {
