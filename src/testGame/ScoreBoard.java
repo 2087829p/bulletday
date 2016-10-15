@@ -10,6 +10,7 @@ public class ScoreBoard {
 	private static final String FILENAME = "scoreboard.txt";
 	public ScoreBoard(){
 		File f = new File(FILENAME);
+		scores = new ArrayList<Integer>();
 		if(f.isFile()){
 			BufferedReader r = null;
 			try {
@@ -24,7 +25,7 @@ public class ScoreBoard {
 				} catch (Exception e){
 					e.printStackTrace();
 				}
-				while(! l.isEmpty()) {
+				while(l == "") {
 					scores.add(new Integer(l));
 					try {
 						l = r.readLine();
