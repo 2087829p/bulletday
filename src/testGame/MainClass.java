@@ -18,6 +18,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JWindow;
+import javax.swing.SwingConstants;
+
 import framework.Animation;
 
 public class MainClass extends Applet implements Runnable, KeyListener {
@@ -47,6 +52,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
+		
+		splashScreen();
+
+	
 		setSize(480, 640);
 		setBackground(Color.BLACK);
 		setFocusable(true);
@@ -107,6 +116,25 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		// super.start();
 	}
 
+	public void splashScreen(){
+		base = getDocumentBase();
+		JWindow window = new JWindow();
+			window.getContentPane().add(
+
+				    new JLabel("", new ImageIcon(getImage(base, "data/billloading.gif")), SwingConstants.CENTER));
+		
+		window.setBounds(270,100, 800, 270);
+		window.setVisible(true);
+		try {
+		    Thread.sleep(10000);
+		} catch (InterruptedException e) {
+		    e.printStackTrace();
+		}
+		window.setVisible(false);
+		window.dispose();
+	
+	}
+	
 	private void loadMap(String filename) throws IOException {
 		ArrayList<String> lines = new ArrayList<String>();
 		int width = 0;
