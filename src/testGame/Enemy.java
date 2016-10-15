@@ -49,10 +49,9 @@ public class Enemy extends Entity {
 	public void update() {
         super.update();
 		follow();
-		centerX += speedX;
+
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
 		
-		speedX = bg.getSpeedX() * 5;
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = rateOfFire;
