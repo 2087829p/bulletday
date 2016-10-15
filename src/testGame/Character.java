@@ -111,7 +111,6 @@ public class Character {
 	public void stopBack() {
 		setMovingBack(false);
 		stop();
-		
 	}
 
 	private void stop() {
