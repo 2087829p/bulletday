@@ -1,9 +1,12 @@
 package testGame;
 
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.math.*;
 
 import framework.AudioHandler;
+import java.util.List;
+import java.awt.geom.Point2D;
 
 public class Enemy extends Entity {
 	private final int PLAYER_COLLISION_DAGAME=-1;
@@ -21,15 +24,17 @@ public class Enemy extends Entity {
 	private int movementSpeed;
 	private double[] angle;
 	int delay=DEFAULT_DELAY;
-	
+	List<Point> path;
+	int at=0;
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
-			int movementSpeed){
+			int movementSpeed,List<Point> path){
 	    super(centerX, centerY, new EnemySprite(centerX,centerY));       
 	    sprite.move(centerX, centerY, sprite.width, sprite.height);
 	    this.numOfBullets = numOfBullets;
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
 		this.updateCount = 0;
+		this.path=path;
     	this.angle = new double[this.numOfBullets];
     	switch(numOfBullets){
     	case 1:
@@ -51,19 +56,32 @@ public class Enemy extends Entity {
     @Override
 	public void update() {
         super.update();
-		follow();
-		centerX += speedX;
+		//follow();		
+		Point currloc=new Point(this.centerX,this.centerY);
+		Point destination=path.get(at);
+		if(currloc.x==destination.x && currloc.y==destination.y){
+			at++;			
+			at=(at>=path.size())?at%path.size():at;			
+		}		
+		//centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
-		speedX = bg.getSpeedX() * 5;
+		//speedX = bg.getSpeedX() * 5;
+		moveTo(path.get(at),speedX);
 		sprite.move(centerX, centerY, sprite.width, sprite.height);
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = 100 - rateOfFire;
 		}
 		updateCount --;
-		delay--;        
-	}
-
+		delay--;
+    }
+    private void moveTo(Point p,int speed){
+    	int xchange=(int) (speed*Math.signum(p.x-centerX));
+    	int ychange=(int) (speed*Math.signum(p.y-centerY));
+    	centerX+=xchange;
+    	centerY+=ychange;
+    }
+    
     public void shoot() {
     	if(canFire()){
     		for(double a : angle) {    		
