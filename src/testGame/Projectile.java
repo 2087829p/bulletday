@@ -7,7 +7,7 @@ public class Projectile {
 	private int x, y, speedX, speedY;
 	private boolean visible;
 
-	private Rectangle r;
+	protected Rectangle r;
 
 	public Projectile(int startX, int startY, int sX, int sY) {
 		x = startX;
@@ -29,33 +29,8 @@ public class Projectile {
 
 	}
 
-	private void checkCollision() {
-		if (r.intersects(MainClass.h1.r)) {
-			visible = false;
-			//MainClass.score += 1;
-			if (MainClass.h1.health > 0) {
-				MainClass.h1.health -= 1;
-			}
-			if (MainClass.h1.health == 0) {
-				MainClass.h1.setCenterX(-100);
-				MainClass.score += 5;
-
-			}
-		}
-
-		if (r.intersects(MainClass.h2.r)) {
-			visible = false;
-			//MainClass.score += 1;
-			if (MainClass.h2.health > 0) {
-				MainClass.h2.health -= 1;
-			}
-			if (MainClass.h2.health == 0) {
-				MainClass.h2.setCenterX(-100);
-				MainClass.score += 5;
-
-			}
-
-		}
+	private void checkCollision(){
+		//done in subclasses
 	}
 
 	public int getX() {
