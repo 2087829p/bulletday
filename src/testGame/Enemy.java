@@ -129,7 +129,7 @@ public class Enemy extends Entity {
 	}
 	public void die() {
 		MainClass.enemies.remove(this);
-		//AudioHandler.playSound("data/explodemini.wav");
+		AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {

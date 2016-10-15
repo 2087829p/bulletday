@@ -24,6 +24,7 @@ import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
 import framework.Animation;
+import framework.AudioHandler;
 
 public class MainClass extends Applet implements Runnable, KeyListener {
 
@@ -85,6 +86,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		hanim.addFrame(heliboy, 100);
 
 		currentSprite = anim.getImage();
+		
 	}
 
 	@Override
@@ -103,7 +105,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		AudioHandler.playSound("data/orbital_colossus.wav");
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
 		// super.start();
