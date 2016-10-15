@@ -22,7 +22,7 @@ public class PowerUp extends Entity{
 		super.update();
 		if(collides(theCharacter)){
 			switch(typeOfPU){
-			case 0: theCharacter.incDamage();
+			case 0: //theCharacter.incDamage();
 					break;
 			case 1: theCharacter.incProjNum();
 					break;

@@ -9,13 +9,14 @@ import testGame.MainClass.GameState;
 
 public class Character extends Entity{
 	private final int DEFAULT_PLAYER_HEALTH=3;
-	final int MOVESPEED = 5;	
+	private int MOVESPEED = 5;	
 	int health;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingForward = false;
 	private boolean movingBack = false;
 	private boolean readyToFire = true;
+	private int noProjectiles = 1;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 	private final int FIRE_DELAY=17;
 	private int delay;
@@ -32,12 +33,31 @@ public class Character extends Entity{
 	public void shoot() {
 		System.out.println(delay);
 		if (isReadyToFire()) {
-			Projectile p = new PlayerProjectile(centerX, 
-					centerY - sprite.getShape().height , speedX, -speedY - 10);
-			projectiles.add(p);
-			AudioHandler.playSound("data/laser12.wav");
-			delay=FIRE_DELAY;
+            if(noProjectiles == 1) {
+    			Projectile p = new PlayerProjectile(centerX, 
+					centerY - sprite.getShape().height , speedX, - 15);
+			    projectiles.add(p);
+            } else {
+                if(noProjectiles % 2 == 0) {
+                    Projectile[] p = new PlayerProjectile[noProjectiles];
+                    for(int i = 0; i < noProjectiles; i ++) {
+                        int mid = noProjectiles/2;
+                        projectiles.add(new PlayerProjectile(centerX, centerY - sprite.getShape().height,
+                        speedX + ((mid - i) % mid )- mid, 15 - mid + (mid - i) % mid));
+                    }
+                }
+            }
+		    AudioHandler.playSound("data/laser12.wav");
+		    delay=FIRE_DELAY;
 		}
+	}
+	
+	public void incSpeed() {
+		this.MOVESPEED += 5;
+	}
+	
+	public void incProjNum() {
+		this.noProjectiles = Math.min(16, noProjectiles + 1);
 	}
 	
 	@Override
