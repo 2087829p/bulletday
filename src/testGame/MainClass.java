@@ -40,7 +40,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	private Font font = new Font(null, Font.BOLD, 30);
-
+	public static List<EnemyProjectile> enemy_projectiles;
+	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
 		setSize(800, 480);

@@ -1,6 +1,7 @@
 package testGame;
 
 public class Entity {
+	final int GROUND = 382;
     protected BasicSprite sprite;
     protected int centerX;
     protected int centerY;
@@ -17,12 +18,13 @@ public class Entity {
     public void update() {
         centerX += speedX;
         centerY += speedY;
+        centerY=java.lang.Math.min(centerY, GROUND);
         sprite.move(speedX,speedY);
 
     }
 
-    public boolean checkCollision(Entity e) {
-        return collides(e);
+    public void checkCollision() {
+        //return collides(e);
     }
 
     public boolean collides(Entity e) {
