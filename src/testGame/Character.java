@@ -8,7 +8,7 @@ import framework.AudioHandler;
 import testGame.MainClass.GameState;
 
 public class Character extends Entity{
-	private final int DEFAULT_PLAYER_HEALTH=1000;
+	private final int DEFAULT_PLAYER_HEALTH=10;
 	private int MOVESPEED = 5;	
 	int health;
 	private boolean movingLeft = false;

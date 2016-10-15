@@ -86,10 +86,8 @@ public class Enemy extends Entity {
     	if(canFire()){
     		for(double a : angle) {    		
     		Double xSpeed = new Double(Math.cos(a) * 2 * this.movementSpeed);
-    		Double ySpeed = new Double(Math.sin(a) * 2 * this.movementSpeed);
-    		EnemyProjectile bullet = new EnemyProjectile(this.centerX, this.centerY
-    				, this.speedX + xSpeed.intValue(), 
-    				  this.speedY + ySpeed.intValue());
+    		EnemyProjectile bullet = new EnemyProjectile(this.centerX+(sprite.width/2), 
+    				this.centerY+(sprite.height-5), this.speedX + xSpeed.intValue(), 2);
     		MainClass.enemy_projectiles.add(bullet);
     		delay=DEFAULT_DELAY;
     		}
