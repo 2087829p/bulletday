@@ -3,34 +3,21 @@ package testGame;
 import java.awt.Rectangle;
 
 public class Projectile extends Entity{
-
-	private int  speedX, speedY;
 	private boolean visible;
 
 	public Projectile(int startX, int startY, int sX, int sY) {
-        super(x, y, new ProjectileSprite(startX,startY));
+        super(startX, startY, new ProjectileSprite(startX,startY));
 		speedX = sX;
 		speedY = sY;
 		visible = true;
 	}
-
-	public void update() {
-		x += speedX;
-		y += speedY;
-		r.setBounds(x, y, 10, 5);
-		if (x > 800 || x < 0 || y > 480 || y < 0) {
-			visible = false;
-			r = null;
-		}
-
-	}
     
 	public int getX() {
-		return x;
+		return centerX;
 	}
 
 	public int getY() {
-		return y;
+		return centerY;
 	}
 
 	public int getSpeedX() {
@@ -42,11 +29,11 @@ public class Projectile extends Entity{
 	}
 
 	public void setX(int x) {
-		this.x = x;
+		this.centerX = x;
 	}
 
 	public void setY(int y) {
-		this.y = y;
+		this.centerY = y;
 	}
 
 	public void setSpeedX(int speedX) {

@@ -1,16 +1,31 @@
 package testGame;
 
 public class Entity {
-    Protected BasicSprite sprite;
-    Protected int x;
-    Protected int y;
+    protected BasicSprite sprite;
+    protected int centerX;
+    protected int centerY;
+    protected int speedX;
+    protected int speedY;
     public Entity(int x, int y, BasicSprite sprite) {
-        this.x = x;
-        this.y = y;
+        this.centerX = x;
+        this.centerY = y;
         this.sprite = sprite;
+        this.speedX = 0;
+        this.speedY = 0;
+    }
+    
+    public void update() {
+        centerX += speedX;
+        centerY += speedY;
+        sprite.move(speedX,speedY);
+
     }
 
-    public boolean collides(Entity e){
+    public boolean checkCollision(Entity e) {
+        return collides(e);
+    }
+
+    public boolean collides(Entity e) {
         return e.getSprite().collides(sprite);
     }
 

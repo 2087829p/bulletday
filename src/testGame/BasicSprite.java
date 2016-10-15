@@ -1,15 +1,15 @@
 package testGame;
 
-package java.awt.Rectangle;
-package java.io.File;
-package java.io.IOException;
-package java.awt.image.BufferedImage;
+import java.awt.Rectangle;
+import java.io.File;
+import java.io.IOException;
+import java.awt.image.BufferedImage;
 
 public class BasicSprite {
     private int x;
     private int y;
     private Rectangle shape;
-    private BuffreredImage sprite;
+    private BufferedImage sprite;
 
     public BasicSprite(int x, int y, String fn) {
         try {
@@ -28,5 +28,9 @@ public class BasicSprite {
 
     public boolean collides(BasicSprite b) {
         return b.getShape().intersects(shape);
+    }
+
+    public void move(int x, int y) {
+        shape.setLocation(this.x + x,this.y + y);
     }
 }

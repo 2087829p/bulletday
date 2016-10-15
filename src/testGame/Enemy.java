@@ -2,7 +2,7 @@ package testGame;
 
 import java.awt.Rectangle;
 
-public class Enemy {
+public class Enemy extends Entity {
 	int health;
 	private int speedX;
 	private int centerX;
@@ -11,12 +11,11 @@ public class Enemy {
 	private int rateOfFire;
 	private Background bg = MainClass.getBg1();
 	private Character enemy = MainClass.getCharacter();
-	public Rectangle r = new Rectangle(0, 0, 0, 0);
 	private int movementSpeed;
 	
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
-	 
+	    super(centerX, centerY, new EnemySprite(centerX,centerY));       
 		this.centerX = centerX;
 		this.centerY = centerY;
 		this.numOfBullets = numOfBullets;
@@ -26,27 +25,19 @@ public class Enemy {
 	}
 	
 	// Behavioral Methods
+    @Override
 	public void update() {
+        super.update();
 		follow();
 		centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
 		
 		speedX = bg.getSpeedX() * 5;
-		r.setBounds(centerX - 25, centerY - 25, 50, 60);
-
-		if (r.intersects(Character.yellowRed)) {
-			checkCollision();
-		}
+        if(collides(enemy)){
+            // DO SOMETHING
+        }
 	}
 
-	private void checkCollision() {
-		if (r.intersects(Character.rect) || r.intersects(Character.rect2)
-				|| r.intersects(Character.rect3)
-				|| r.intersects(Character.rect4)) {
-			System.out.println("collision");
-
-		}
-	}
 
 	public void follow() {
 
