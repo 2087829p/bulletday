@@ -174,7 +174,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 						enemies_in_scene.add(e);
 					}
 				}
-				wave_counter = wave_counter ++ % 30;
+				wave_counter = wave_counter + 1 % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
 				for (Projectile p : projectiles) {
