@@ -1,7 +1,7 @@
 package testGame;
 
 public class Entity {
-	final int GROUND = 382;
+	final int GROUND = 470;
     protected BasicSprite sprite;
     protected int centerX;
     protected int centerY;
