@@ -229,6 +229,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if (spaceship.getCenterY() > 640) {
 					spaceship.setCenterY(640);
 				}
+				if(spaceship.getCenterX() < 0){
+					spaceship.setCenterX(0);
+				}
+				else if(spaceship.getCenterX() > 480){
+					spaceship.setCenterX(480);
+				}
 		}
 	}
 	
@@ -275,6 +281,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.setColor(Color.WHITE);
 			g.drawString("Dead", WIDTH/2, 240);
 		}else{
+			scoreBoard.addScore(score);
+			scoreBoard.saveScores();
+			String top10 = scoreBoard.getN(10);
+			g.drawString(top10, 320, 100);
 			
 		}
 	}
