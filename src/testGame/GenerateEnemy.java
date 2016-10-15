@@ -29,13 +29,13 @@ public class GenerateEnemy {
         int power = difficulty/count;
         int bullets = generate_num(power);
         power=Math.max(1, power-bullets);
-        int speed = generate_num(power);
+        int speed = -generate_num(power);
         power=Math.max(1, power-speed);
         int bullet_rate = generate_num(power);
         power=Math.max(1, power-bullet_rate);
         int path = 0;
         if (power > 1){
-            speed += power / 3;
+            speed -= power / 3;
             power -= power/3;
             bullet_rate += power / 2;
             power -= power / 2;

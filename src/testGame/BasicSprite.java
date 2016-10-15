@@ -37,6 +37,6 @@ public class BasicSprite {
     }
 
     public void move(int x, int y) {
-        shape.setLocation(this.x + x,this.y + y);
+        shape.setLocation(x,y);
     }
 }
