@@ -9,17 +9,16 @@ import testGame.MainClass.GameState;
 
 public class Character extends Entity{
 	private final int DEFAULT_PLAYER_HEALTH=3;
-	private int movespeed = 5;	
+	final int MOVESPEED = 5;	
 	int health;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingForward = false;
 	private boolean movingBack = false;
 	private boolean readyToFire = true;
-	private static int damage = 1;
-	private static int projNum = 1;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	
+	private final int FIRE_DELAY=17;
+	private int delay;
 	private static Background bg1 = MainClass.getBg1();
 	private static Background bg2 = MainClass.getBg2();
 	
@@ -27,14 +26,17 @@ public class Character extends Entity{
 	public Character(int centerX, int centerY) {
         super(centerX, centerY, new CharacterSprite(centerX, centerY));
         this.health=DEFAULT_PLAYER_HEALTH;
+        delay=0;
     }
 	
 	public void shoot() {
-		if (readyToFire) {
-			Projectile p = new PlayerProjectile(centerX, 
-					centerY - sprite.getShape().height , speedX, -speedY - 10);
+		System.out.println(delay);
+		if (isReadyToFire()) {
+			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
+					centerY + sprite.getShape().height , speedX, speedY - 10);
 			projectiles.add(p);
-			//AudioHandler.playSound("data/laser12.wav");
+			AudioHandler.playSound("data/laser12.wav");
+			delay=FIRE_DELAY;
 		}
 	}
 	
@@ -47,6 +49,7 @@ public class Character extends Entity{
 			projectiles.get(p).update();
 			p += 1 - start_size + projectiles.size();
 		}
+		delay--;
 	}
 	
 	public void setHealth(int health){
@@ -70,19 +73,19 @@ public class Character extends Entity{
 	}
 	
 	public void moveRight() {
-		speedX = movespeed;
+		speedX = MOVESPEED;
 	}
 
 	public void moveLeft() {
-		speedX = -movespeed;
+		speedX = -MOVESPEED;
 	}
 	
 	public void moveForward() {
-		speedY = -movespeed;
+		speedY = -MOVESPEED;
 	}
 	
 	public void moveBack() {
-		speedY = movespeed;
+		speedY = MOVESPEED;
 	}
 
 	public void stopRight() {
@@ -124,7 +127,7 @@ public class Character extends Entity{
 	}
 
 	public boolean isReadyToFire() {
-		return readyToFire;
+		return delay<=0;
 	}
 
 	public void setReadyToFire(boolean readyToFire) {
@@ -161,34 +164,6 @@ public class Character extends Entity{
 
 	public void setMovingForward(boolean movingForward) {
 		this.movingForward = movingForward;		
-	}
-	
-	public int getDamage(){
-		return damage;
-	}
-	
-	public void incDamage(){
-		damage++;
-	}
-	
-	public int getProjNum(){
-		return projNum;
-	}
-	
-	public void incProjNum(){
-		if(projNum < 5){
-			projNum = projNum + 2;
-		}
-	}
-	
-	public int getSpeed(){
-		return movespeed;
-	}
-	
-	public void incSpeed(){
-		if(movespeed < 10){
-			movespeed++;
-		}
 	}
 
 }

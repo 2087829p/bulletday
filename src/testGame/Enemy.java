@@ -3,6 +3,8 @@ package testGame;
 import java.awt.Rectangle;
 import java.math.*;
 
+import framework.AudioHandler;
+
 public class Enemy extends Entity {
 	private final int PLAYER_COLLISION_DAGAME=-1;
 	private final int DEFAULT_HEALTH=1;
@@ -105,6 +107,7 @@ public class Enemy extends Entity {
 	public void die() {
 		MainClass.enemies_in_scene.remove(this);
 		MainClass.enemies.remove(this);
+		AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {
