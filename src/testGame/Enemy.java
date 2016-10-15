@@ -27,7 +27,6 @@ public class Enemy extends Entity {
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
 		this.updateCount = 0;
-		this.speedY = - movementSpeed;
     	this.angle = new double[this.numOfBullets];
     	switch(numOfBullets){
     	case 1:
@@ -50,11 +49,10 @@ public class Enemy extends Entity {
 	public void update() {
         super.update();
 		follow();
-		if(centerY == GROUND){
-			this.die();
-		}
+		centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
 		
+		speedX = bg.getSpeedX() * 5;
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = rateOfFire;
@@ -128,7 +126,6 @@ public class Enemy extends Entity {
 		health+=amount;
 		if(health<=0){
 			die();
-			MainClass.addToScore();
 		}
 	}
 }
