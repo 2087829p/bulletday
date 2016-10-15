@@ -56,6 +56,10 @@ public class Character extends Entity{
 		return projectiles;
 	}
 
+	public void removeProjectile(Projectile p) {
+		projectiles.remove(p);
+	}
+	
 	public void moveRight() {
 		speedX = MOVESPEED;
 	}
