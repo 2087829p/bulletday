@@ -103,7 +103,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		spaceship = new Character();
+		spaceship = new Character(380, 400);
 		// for (int i = 0; i < 200; i++) {
 		// for (int j = 0; j < 12; j++) {
 		// if (j == 11) {

@@ -16,8 +16,6 @@ public class Enemy extends Entity {
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
 	    super(centerX, centerY, new EnemySprite(centerX,centerY));       
-		this.centerX = centerX;
-		this.centerY = centerY;
 		this.numOfBullets = numOfBullets;
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
@@ -64,32 +62,8 @@ public class Enemy extends Entity {
 
 	}
 
-	public int getSpeedX() {
-		return speedX;
-	}
-
-	public int getCenterX() {
-		return centerX;
-	}
-
-	public int getCenterY() {
-		return centerY;
-	}
-
 	public Background getBg() {
 		return bg;
-	}
-
-	public void setSpeedX(int speedX) {
-		this.speedX = speedX;
-	}
-
-	public void setCenterX(int centerX) {
-		this.centerX = centerX;
-	}
-
-	public void setCenterY(int centerY) {
-		this.centerY = centerY;
 	}
 
 	public void setBg(Background bg) {
