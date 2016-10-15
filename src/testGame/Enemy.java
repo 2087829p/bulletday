@@ -14,7 +14,7 @@ public class Enemy {
 	public Rectangle r = new Rectangle(0, 0, 0, 0);
 	private int movementSpeed;
 	
-	public void Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
+	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
 	
 		this.centerX = centerX;
