@@ -68,6 +68,9 @@ public class Enemy extends Entity {
 		//speedX = bg.getSpeedX() * 5;
 		moveTo(path.get(at),speedX);
 		sprite.move(centerX, centerY, sprite.width, sprite.height);
+		if(centerY + this.sprite.height > 640){
+        	die();
+        }
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = 100 - rateOfFire;
