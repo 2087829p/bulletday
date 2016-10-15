@@ -55,7 +55,8 @@ public class GenerateEnemy {
         for(int i = 0; i < count; i ++) {
             double x = 0.5 * x_spacing;
             x += x_spacing * i;
-            ret[i] = new Enemy(); // TODO set up constructor
+            Double X = new Double(X);
+            ret[i] = new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
         }
         return ret;
     }
@@ -72,6 +73,8 @@ public class GenerateEnemy {
         if(power < 0)
             power = 1;
         int speed = power;
-        return new Enemy(); // TODO set up constructor
+        double x = rng.nextDouble() * (GameMap.BOX_WIDTH / 2) + (GameMap.BOX_WIDTH / 4);
+        Double X = new Double(x);
+        return new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
     }
 }
