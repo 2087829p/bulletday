@@ -31,6 +31,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
+	private boolean hasSubmited = false;
 	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
@@ -105,7 +106,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		AudioHandler.playSound("data/orbital_colossus.wav");
+		//AudioHandler.playSound("data/orbital_colossus.wav"); // AUDIO
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
 		// super.start();
@@ -281,13 +282,24 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
-			g.drawString("Dead", 320, 30);
-			g.drawString("Score Board", 320, 60);
-			scoreBoard.addScore(score);
-			scoreBoard.saveScores();
-			String top10 = scoreBoard.getN(10);
-			g.drawString(top10, 320, 100);
-
+			g.drawString("Dead", 200, 30);
+			g.drawString("Score Board", 200, 60);
+			if(!hasSubmited) {
+				scoreBoard.addScore(score);
+				scoreBoard.saveScores();
+				hasSubmited = true;
+			}
+			int i = 0;
+			for(Integer s : scoreBoard.getList()) {
+				if(i >= scoreBoard.getList().size()) {
+					break;
+				}
+				g.drawString(i + ": " + s.toString(), 200, 90 + 30 * i);
+				i ++;
+				if(i == 10) {
+					break;
+				}
+			}
 		}
 	}
 
