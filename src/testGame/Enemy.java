@@ -8,6 +8,7 @@ import framework.AudioHandler;
 public class Enemy extends Entity {
 	private final int PLAYER_COLLISION_DAGAME=-1;
 	private final int DEFAULT_HEALTH=1;
+	private final int DEFAULT_DELAY=30;
 	int health;
 	private int speedX;
 	//private int centerX;
@@ -19,6 +20,7 @@ public class Enemy extends Entity {
 	private Character player = MainClass.getCharacter();
 	private int movementSpeed;
 	private double[] angle;
+	int delay=DEFAULT_DELAY;
 	
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
@@ -59,6 +61,7 @@ public class Enemy extends Entity {
 			updateCount = 100 - rateOfFire;
 		}
 		updateCount --;
+		delay--;
         if(collides(player)){
         	System.out.print("Collision");
             this.die();
@@ -77,17 +80,21 @@ public class Enemy extends Entity {
         		}
         	}
         }
+        
 	}
 
     public void shoot() {
-    	for(double a : angle) {
+    	if(canFire()){
+    		for(double a : angle) {    		
     		Double xSpeed = new Double(Math.cos(a) * 2 * this.movementSpeed);
     		Double ySpeed = new Double(Math.sin(a) * 2 * this.movementSpeed);
     		EnemyProjectile bullet = new EnemyProjectile(this.centerX, this.centerY
     				, this.speedX + xSpeed.intValue(), 
     				  this.speedY + ySpeed.intValue());
     		MainClass.enemy_projectiles.add(bullet);
-    	}
+    		delay=DEFAULT_DELAY;
+    		}
+    	}    	
     }
     
 	public void follow() {
@@ -110,7 +117,9 @@ public class Enemy extends Entity {
 		}
 
 	}
-	
+	public boolean canFire(){
+		return delay<=0;
+	}
 	public void die() {
 		MainClass.enemies.remove(this);
 		AudioHandler.playSound("data/explodemini.wav");
@@ -126,6 +135,7 @@ public class Enemy extends Entity {
 	public void setHealth(int amount){
 		health+=amount;
 		if(health<=0){
+			MainClass.addToScore();
 			die();
 		}
 	}

@@ -12,6 +12,15 @@ public class EnemyProjectile extends Projectile{
 			die();
 		}
 	}
+	@Override
+	public void update() {
+		this.centerY+=8;
+		this.sprite.shape.setBounds(this.centerX,this.centerY,10,5);
+		if(this.centerY > GameMap.BOX_HIEGHT || this.centerY < 0) {
+			die();
+		}
+		this.checkCollision();
+	}
 	
 	@Override
 	public void die() {
