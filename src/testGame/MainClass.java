@@ -28,8 +28,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
-	private Image image, currentSprite, character, character2, character3,
-			background, heliboy;
+	private Image image, currentSprite, background, heliboy;
 	private Graphics second;
 	private URL base;
 	private static Character spaceship;
@@ -41,6 +40,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
+	public static ScoreBoard scoreBoard = new ScoreBoard();
 	public static int multiplier = 1;
 	public static ArrayList<EnemyProjectile> enemy_projectiles = new ArrayList<EnemyProjectile>();
 	private Font font = new Font("TimesRoman", Font.BOLD, 30);
@@ -61,16 +61,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		}
 		
 		// Image Setups
-		
-		character = getImage(base, "data/character.png");
-		character2 = getImage(base, "data/character2.png");
-		character3 = getImage(base, "data/character3.png");
 
 		heliboy = getImage(base, "data/heliboy.png");
-
 		background = getImage(base, "data/background.png");
-		// tiledirt = getImage(base, "data/tiledirt.png");
-		// tileocean = getImage(base, "data/tileocean.png");
 		tiledirt = getImage(base, "data/tiledirt.png");
 		tilegrassTop = getImage(base, "data/tilegrasstop.png");
 		tilegrassBot = getImage(base, "data/tilegrassbot.png");
