@@ -21,7 +21,6 @@ public class Character extends Entity{
 	private final int FIRE_DELAY=17;
 	private int delay;
 	private static Background bg1 = MainClass.getBg1();
-	private static Background bg2 = MainClass.getBg2();
 	
 
 	public Character(int centerX, int centerY) {

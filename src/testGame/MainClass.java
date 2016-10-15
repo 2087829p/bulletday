@@ -34,7 +34,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private URL base;
 	private static Character spaceship;
 	private Animation anim, hanim;
-	private static Background bg1, bg2;
+	private static Background bg1;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
 			tilegrassRight, tiledirt;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
@@ -88,7 +88,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void start() {
 		bg1 = new Background(0, 0);
-		bg2 = new Background(2160, 0);
 		spaceship = new Character(380, 400);
 		BasicSprite characterUFO = spaceship.getSprite();
 		Image characterUFOImage = characterUFO.getSprite();
@@ -133,7 +132,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				
 				if (i < line.length()) {
 					char ch = line.charAt(i);
-					System.out.println(line.charAt(i) + "is i ");
 					Tile t = new Tile(i, j, java.lang.Character.getNumericValue(ch));
 					tilearray.add(t);
 				}
@@ -189,7 +187,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				}
 				updateTiles();
 				bg1.update();
-				bg2.update();
 				int i = 0;
 				while( i < enemies.size()) {
 					Enemy e = enemies.get(i);
@@ -220,7 +217,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics g) {
 		if (state == GameState.Running) {
 		g.drawImage(background, bg1.getBgX(), bg1.getBgY(), this);
-		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
 		paintTiles(g);
 
 		ArrayList<Projectile> projectiles = spaceship.getProjectiles();
@@ -324,9 +320,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		return bg1;
 	}
 
-	public static Background getBg2() {
-		return bg2;
-	}
 
 	public static Character getCharacter() {
 		return spaceship;
