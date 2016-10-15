@@ -22,9 +22,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
-
-	GameState state = GameState.Running;
 	public static ArrayList<Projectile> projectiles;
+	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
 			characterDown, characterJumped, background, heliboy, heliboy2,
@@ -339,6 +338,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	public static void setGameState(GameState newState){
+		state=newState;
 	}
 
 }

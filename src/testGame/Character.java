@@ -4,10 +4,13 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
+import testGame.MainClass.GameState;
+
 public class Character extends Entity{
+	private final int DEFAULT_PLAYER_HEALTH=3;
 	final int MOVESPEED = 5;
 	final int GROUND = 382;
-
+	int health;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingForward = false;
@@ -18,6 +21,7 @@ public class Character extends Entity{
 	private static Background bg2 = MainClass.getBg2();
 	public Character(int centerX, int centerY) {
         super(centerX, centerY, new CharacterSprite(centerX, centerY));
+        this.health=DEFAULT_PLAYER_HEALTH;
     }
 	
 	public void shoot() {
@@ -26,7 +30,18 @@ public class Character extends Entity{
 			projectiles.add(p);
 		}
 	}
-
+	public void setHealth(int health){
+		this.health+=health;
+		if(this.health<=0){
+			die();
+		}
+	}
+	public int getHealth(){
+		return health;
+	}
+	public void die(){
+		MainClass.setGameState(GameState.Dead);
+	}
 	public ArrayList getProjectiles() {
 		return projectiles;
 	}

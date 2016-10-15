@@ -4,6 +4,8 @@ import java.awt.Rectangle;
 import java.math.*;
 
 public class Enemy extends Entity {
+	private final int PLAYER_COLLISION_DAGAME=-1;
+	private final int DEFAULT_HEALTH=1;
 	int health;
 	private int speedX;
 	private int centerX;
@@ -37,6 +39,7 @@ public class Enemy extends Entity {
 				angle[i] = i * 360.0/numOfBullets; 
 			}
     	}
+		this.health=DEFAULT_HEALTH;
 	}
 	
 	// Behavioral Methods
@@ -54,7 +57,8 @@ public class Enemy extends Entity {
 		}
 		updateCount --;
         if(collides(enemy)){
-            // DO SOMETHING
+            this.die();
+            enemy.setHealth(PLAYER_COLLISION_DAGAME);
         }
 	}
 
@@ -89,7 +93,7 @@ public class Enemy extends Entity {
 		}
 
 	}
-
+	
 	public void die() {
 
 	}
@@ -101,5 +105,10 @@ public class Enemy extends Entity {
 	public void setBg(Background bg) {
 		this.bg = bg;
 	}
-
+	public void setHealth(int amount){
+		health+=amount;
+		if(health<=0){
+			die();
+		}
+	}
 }
