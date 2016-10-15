@@ -10,7 +10,7 @@ import javax.imageio.ImageIO;
 public class BasicSprite {
     private int x;
     private int y;
-    private Rectangle shape;
+    public Rectangle shape;
     private BufferedImage sprite;
 
     public BasicSprite(int x, int y, String fn) {

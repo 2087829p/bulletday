@@ -24,10 +24,12 @@ public class Projectile extends Entity{
 	
 	@Override
 	public void update() {
-		super.update();
+		this.centerY-=17;
+		this.sprite.shape.setBounds(this.centerX,this.centerY,10,5);
 		if(this.centerY > GameMap.BOX_HIEGHT || this.centerY < 0) {
 			die();
 		}
+		this.checkCollision();
 	}
 	
 	public void die() {

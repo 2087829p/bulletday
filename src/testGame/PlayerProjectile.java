@@ -9,10 +9,10 @@ public class PlayerProjectile extends Projectile{
 	}
 	@Override
 	public void checkCollision(){
-		List<Enemy> enemies=MainClass.enemies_in_scene;
+		List<Enemy> enemies=MainClass.enemies;
 		for(int i=0;i<enemies.size();i++){
-			if(this.collides(MainClass.enemies_in_scene.get(i))){
-				MainClass.enemies_in_scene.get(i).setHealth(-damage);
+			if(this.collides(MainClass.enemies.get(i))){
+				MainClass.enemies.get(i).setHealth(-damage);
 				die();
 			}
 		}
