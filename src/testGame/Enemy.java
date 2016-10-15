@@ -10,8 +10,8 @@ public class Enemy extends Entity {
 	private final int DEFAULT_HEALTH=1;
 	int health;
 	private int speedX;
-	private int centerX;
-	private int centerY;
+	//private int centerX;
+	//private int centerY;
 	private int numOfBullets;
 	private int rateOfFire;
 	private int updateCount;
@@ -23,11 +23,11 @@ public class Enemy extends Entity {
 	public Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
 	    super(centerX, centerY, new EnemySprite(centerX,centerY));       
-		this.numOfBullets = numOfBullets;
+	    sprite.move(centerX, centerY, sprite.width, sprite.height);
+	    this.numOfBullets = numOfBullets;
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
 		this.updateCount = 0;
-		this.speedY = - movementSpeed;
     	this.angle = new double[this.numOfBullets];
     	switch(numOfBullets){
     	case 1:
@@ -50,11 +50,11 @@ public class Enemy extends Entity {
 	public void update() {
         super.update();
 		follow();
-		if(centerY == GROUND){
-			this.die();
-		}
+		centerX += speedX;
 		speedX = bg.getSpeedX() * 5 + movementSpeed;
-		if(updateCount == 0) {
+		speedX = bg.getSpeedX() * 5;
+		sprite.move(centerX, centerY, sprite.width, sprite.height);
+		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = 100 - rateOfFire;
 		}
@@ -113,7 +113,7 @@ public class Enemy extends Entity {
 	
 	public void die() {
 		MainClass.enemies.remove(this);
-		//AudioHandler.playSound("data/explodemini.wav");
+		AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {
@@ -127,7 +127,6 @@ public class Enemy extends Entity {
 		health+=amount;
 		if(health<=0){
 			die();
-			MainClass.addToScore();
 		}
 	}
 }
