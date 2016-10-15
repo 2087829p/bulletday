@@ -1,7 +1,10 @@
 package testGame;
 
 import java.util.Random;
+import java.awt.Point;
 import java.lang.Math;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GenerateEnemy {
     public static Random rng=new Random();
@@ -47,13 +50,18 @@ public class GenerateEnemy {
         x_spacing /= count + 1;
         for(int i = 0; i < count; i ++) {
             double x = 0.5 * x_spacing;
-            x += x_spacing * i;
-            Double X = new Double(x);
-            ret[i] = new Enemy((int)(x + i * x_spacing), 100, speed, bullets, bullet_rate, speed);
+            x += x_spacing * i; 
+            x=Math.min(GameMap.BOX_WIDTH-30, x);
+            ret[i] = new Enemy((int)x, 100, speed, bullets, bullet_rate, speed,gen_path(new Point((int) x,100)));
         }
         return ret;
     }
-
+    public static List<Point> gen_path(Point p){
+    	List<Point> path=new ArrayList<Point>();
+    	path.add(new Point(MainClass.getCharacter().centerX,MainClass.getCharacter().centerY));
+    	path.add(p);
+    	return path;
+    }
     // Generates a single enemy
     public Enemy single_enemy(int difficulty) {
         int power = difficulty;
@@ -68,6 +76,6 @@ public class GenerateEnemy {
         int speed = power;
         double x = rng.nextDouble() * (GameMap.BOX_WIDTH / 2) + (GameMap.BOX_WIDTH / 4);
         Double X = new Double(x);
-        return new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
+        return new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed,gen_path(new Point(X.intValue(),100)));
     }
 }
