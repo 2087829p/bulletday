@@ -39,12 +39,23 @@ public class ScoreBoard {
 		scores.add(new Integer(score));
 		Collections.sort(scores);
 	}
-	public void saveScores() {
+	
+	public String toString() {
+		return getNtoM(0,scores.size());
+	}
+	
+	public String getN(int n){
+		return getNtoM(0,n);
+	}
+	public String getNtoM(int m, int n) {
 		StringBuilder sb = new StringBuilder();
-		for(Integer i : scores) {			
-			sb.append(i.intValue());
-			sb.append('\n');
+		for(Integer i : scores.subList(m, n)) {
+			sb.append(i.toString() + '\n');
 		}
+		return sb.toString();
+	}
+	public void saveScores() {
+		String sb = this.toString();
 		BufferedWriter r = null;
 		try {
 			r = new BufferedWriter(new FileWriter(FILENAME));
