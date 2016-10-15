@@ -47,9 +47,9 @@ public class GenerateEnemy {
         x_spacing /= count + 1;
         for(int i = 0; i < count; i ++) {
             double x = 0.5 * x_spacing;
-            x += x_spacing * i;
-            Double X = new Double(x);
-            ret[i] = new Enemy((int)(x + i * x_spacing), 100, speed, bullets, bullet_rate, speed);
+            x += x_spacing * i; 
+            x=Math.min(GameMap.BOX_WIDTH-30, x);
+            ret[i] = new Enemy((int)x, 100, speed, bullets, bullet_rate, speed);
         }
         return ret;
     }
