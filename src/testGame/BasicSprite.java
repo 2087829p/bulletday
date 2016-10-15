@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.awt.image.BufferedImage;
 
+import javax.imageio.ImageIO;
+
 public class BasicSprite {
     private int x;
     private int y;
@@ -13,7 +15,7 @@ public class BasicSprite {
 
     public BasicSprite(int x, int y, String fn) {
         try {
-            sprite = new ImageIO.read(new File(fn));
+            sprite = ImageIO.read(new File(fn));
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -47,10 +47,8 @@ public class Tile {
 		speedX = bg.getSpeedX() * 5;
 		tileX += speedX;
 		r.setBounds(tileX, tileY, 40, 40);
-		if (r.intersects(Character.yellowRed) && type != 0) {
-			checkVerticalCollision(Character.rect, Character.rect2);
-			checkSideCollision(Character.rect3, Character.rect4,
-					Character.footleft, Character.footright);
+		if (r.intersects(robot.getSprite().getShape()) && type != 0) {
+			// Handle collision
 		}
 	}
 
