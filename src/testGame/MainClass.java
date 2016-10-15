@@ -181,8 +181,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				updateTiles();
 				bg1.update();
 				bg2.update();
-				for(Enemy e : enemies) {
+				int i = 0;
+				while( i < enemies.size()) {
+					Enemy e = enemies.get(i);
+					int size = enemies.size() + 0;
 					e.update();
+					i += 1 - size + enemies.size();
 				}
 				animate();
 				repaint();

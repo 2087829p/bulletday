@@ -110,9 +110,8 @@ public class Enemy extends Entity {
 	}
 	
 	public void die() {
-		MainClass.enemies_in_scene.remove(this);
 		MainClass.enemies.remove(this);
-		AudioHandler.playSound("data/explodemini.wav");
+		//AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {
