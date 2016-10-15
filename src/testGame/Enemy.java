@@ -62,10 +62,15 @@ public class Enemy extends Entity {
             this.die();
             enemy.setHealth(PLAYER_COLLISION_DAGAME);
         } else {
-        	for(Projectile p : enemy.getProjectiles()) {
-        		if(collides(p)){
+        	int p = 0;
+        	while(p < enemy.getProjectiles().size()) {
+        		if(collides(enemy.getProjectiles().get(p))){
         			this.die();
-        			enemy.removeProjectile(p);
+        			enemy.getProjectiles().get(p).die();
+        			break;
+        		}
+    			else {
+        				p ++;
         			// TODO add death method
         		}
         	}
