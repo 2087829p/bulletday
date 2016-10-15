@@ -36,6 +36,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			tilegrassRight, tiledirt;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
+	public static List<PowerUp> powerUpList=new ArrayList<PowerUp>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	private Font font = new Font(null, Font.BOLD, 30);
