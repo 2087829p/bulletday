@@ -5,7 +5,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Frame;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.BufferedReader;
@@ -40,7 +42,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	public static int multiplier = 1;
-	private Font font = new Font(null, Font.BOLD, 30);
+	private Font font = new Font("TimesRoman", Font.BOLD, 30);
 	public static List<EnemyProjectile> enemy_projectiles;
 	public static List<PlayerProjectile> player_projectiles;
 	@Override
@@ -228,9 +230,11 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		for(Enemy e : enemies){
 			g.drawImage(e.getSprite().getSprite(), e.getCenterX(), e.getCenterY(), this);
 		}
+		Graphics2D g2 = (Graphics2D)g;
 		g.setFont(font);
 		g.setColor(Color.WHITE);
-		g.drawString(("Your score: " +  Integer.toString(score)), 160, 30);
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		g2.drawString(("Multiplier: " + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
@@ -336,6 +340,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static void addToScore(){
 		score = score + (multiplier * 10);
 		multiplier += 1;
+	}
+	
+	public static void resetMultiplier(){
+		multiplier = 1;
 	}
 
 }
