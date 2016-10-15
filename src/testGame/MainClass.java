@@ -22,7 +22,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
-	public static ArrayList<Projectile> projectiles;
+	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
@@ -166,20 +166,30 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void run() {
 		if (state == GameState.Running) {
+			int wave_counter = 0;
 			while (true) {
+				if(wave_counter == 0) {
+					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
+						enemies.add(e);
+						enemies_in_scene.add(e);
+					}
+				}
+				wave_counter = wave_counter ++ % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
-				for (int i = 0; i < projectiles.size(); i++) {
-					Projectile p = (Projectile) projectiles.get(i);
+				for (Projectile p : projectiles) {
 					if (p.isVisible()) {
 						p.update();
 					} else {
-						projectiles.remove(i);
+						projectiles.remove(p);
 					}
 				}
 				updateTiles();
 				bg1.update();
 				bg2.update();
+				for(Enemy e : enemies) {
+					e.update();
+				}
 				animate();
 				repaint();
 				try {
@@ -192,7 +202,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				}
 			}
 		}
-		// TODO Auto-generated method stub
 	}
 	
 	public void animate() {

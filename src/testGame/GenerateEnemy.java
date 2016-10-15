@@ -4,7 +4,7 @@ import java.util.Random;
 import java.lang.Math;
 
 public class GenerateEnemy {
-    public static Random rng;
+    public static Random rng=new Random();
     
     public GenerateEnemy() {
         if(rng == null) {
@@ -20,26 +20,19 @@ public class GenerateEnemy {
     }
 
     private static int generate_num(int n) {
-        return rng.nextInt(n) + 1;
+    	return rng.nextInt(n) + 1;
     }
-    
     // Generate a group of enemies
     public static Enemy[] group_enemy(int difficulty) {
         if(rng == null) {}
-        int count = rng.nextInt(Math.min(difficulty, 6));
+        int count = rng.nextInt(Math.min(difficulty, 6))+1;
         int power = difficulty/count;
         int bullets = generate_num(power);
-        power -= bullets;
-        if(power < 0)
-            power = 1;
+        power=Math.max(1, power-bullets);
         int speed = generate_num(power);
-        power -= speed;
-        if(power < 0)
-            power = 1;
+        power=Math.max(1, power-speed);
         int bullet_rate = generate_num(power);
-        power -= bullet_rate;
-        if(power < 0)
-            power = 1;
+        power=Math.max(1, power-bullet_rate);
         int path = 0;
         if (power > 1){
             speed += power / 3;
@@ -56,7 +49,7 @@ public class GenerateEnemy {
             double x = 0.5 * x_spacing;
             x += x_spacing * i;
             Double X = new Double(x);
-            ret[i] = new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
+            ret[i] = new Enemy(X.intValue(), 125, speed, bullets, bullet_rate, speed);
         }
         return ret;
     }
