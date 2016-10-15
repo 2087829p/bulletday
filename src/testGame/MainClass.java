@@ -214,7 +214,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = (Projectile) projectiles.get(i);
 			g.setColor(Color.YELLOW);
-			g.fillRect(p.getCenterX(), p.getCenterY(), 10, 5);
+			g.fillRect(p.getCenterX(), p.getCenterY(), 5, 10);
 		}
 
 		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
