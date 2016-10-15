@@ -222,8 +222,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		
 		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
 				spaceship.getCenterY() - 63, this);
+		g.drawRect(spaceship.sprite.shape.x, spaceship.sprite.shape.y, spaceship.sprite.shape.width, spaceship.sprite.shape.height);
 		for(Enemy e : enemies){
 			g.drawImage(e.getSprite().getSprite(), e.getCenterX(), e.getCenterY(), this);
+			g.drawRect(e.sprite.shape.x, e.sprite.shape.y, e.sprite.shape.width, e.sprite.shape.height);
 		}
 		Graphics2D g2 = (Graphics2D)g;
 		g.setFont(font);
