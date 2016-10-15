@@ -34,7 +34,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private URL base;
 	private static Character spaceship;
 	private Animation anim, hanim;
-	private static Background bg1;
+	private static Background bg1, bg2;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
 			tilegrassRight, tiledirt;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
@@ -52,7 +52,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		setFocusable(true);
 		addKeyListener(this);
 		Frame f = (Frame) this.getParent().getParent();
-		f.setResizable(false);
 		f.setTitle("Bulletday");
 		
 		try {
@@ -62,10 +61,16 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		}
 		
 		// Image Setups
+		
+		character = getImage(base, "data/character.png");
+		character2 = getImage(base, "data/character2.png");
+		character3 = getImage(base, "data/character3.png");
 
 		heliboy = getImage(base, "data/heliboy.png");
 
 		background = getImage(base, "data/background.png");
+		// tiledirt = getImage(base, "data/tiledirt.png");
+		// tileocean = getImage(base, "data/tileocean.png");
 		tiledirt = getImage(base, "data/tiledirt.png");
 		tilegrassTop = getImage(base, "data/tilegrasstop.png");
 		tilegrassBot = getImage(base, "data/tilegrassbot.png");
@@ -83,11 +88,19 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void start() {
 		bg1 = new Background(0, 0);
+		bg2 = new Background(2160, 0);
 		spaceship = new Character(380, 400);
 		BasicSprite characterUFO = spaceship.getSprite();
 		Image characterUFOImage = characterUFO.getSprite();
 		anim.addFrame(characterUFOImage, 100);
 		currentSprite = anim.getImage();
+		
+		try {
+			loadMap("data/map1.txt");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
@@ -120,6 +133,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				
 				if (i < line.length()) {
 					char ch = line.charAt(i);
+					System.out.println(line.charAt(i) + "is i ");
 					Tile t = new Tile(i, j, java.lang.Character.getNumericValue(ch));
 					tilearray.add(t);
 				}
@@ -175,6 +189,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				}
 				updateTiles();
 				bg1.update();
+				bg2.update();
 				int i = 0;
 				while( i < enemies.size()) {
 					Enemy e = enemies.get(i);
@@ -205,6 +220,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void paint(Graphics g) {
 		if (state == GameState.Running) {
 		g.drawImage(background, bg1.getBgX(), bg1.getBgY(), this);
+		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
 		paintTiles(g);
 
 		ArrayList<Projectile> projectiles = spaceship.getProjectiles();
@@ -231,12 +247,13 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-		g2.drawString(("Multiplier: x" + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
+		g2.drawString(("Multiplier: " + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
 			g.drawString("Dead", 360, 240);
+
 
 		}
 	}
@@ -314,6 +331,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		return bg1;
 	}
 
+	public static Background getBg2() {
+		return bg2;
+	}
 
 	public static Character getCharacter() {
 		return spaceship;
