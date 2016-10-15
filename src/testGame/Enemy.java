@@ -16,7 +16,7 @@ public class Enemy extends Entity {
 	private int rateOfFire;
 	private int updateCount;
 	private Background bg = MainClass.getBg1();
-	private Character enemy = MainClass.getCharacter();
+	private Character player = MainClass.getCharacter();
 	private int movementSpeed;
 	private double[] angle;
 	
@@ -58,20 +58,21 @@ public class Enemy extends Entity {
 			updateCount = rateOfFire;
 		}
 		updateCount --;
-        if(collides(enemy)){
+        if(collides(player)){
+        	System.out.print("Collision");
             this.die();
-            enemy.setHealth(PLAYER_COLLISION_DAGAME);
+            player.setHealth(PLAYER_COLLISION_DAGAME);
         } else {
         	int p = 0;
-        	while(p < enemy.getProjectiles().size()) {
-        		if(collides(enemy.getProjectiles().get(p))){
+        	while(p < player.getProjectiles().size()) {
+        		if(collides(player.getProjectiles().get(p))){
         			this.die();
-        			enemy.getProjectiles().get(p).die();
+        			player.getProjectiles().get(p).die();
+        			System.out.print("Collision");
         			break;
         		}
     			else {
-        				p ++;
-        			// TODO add death method
+        			p ++;
         		}
         	}
         }
@@ -94,13 +95,13 @@ public class Enemy extends Entity {
 			movementSpeed = 0;
 		}
 
-		else if (Math.abs(enemy.getCenterX() - centerX) < 5) {
+		else if (Math.abs(player.getCenterX() - centerX) < 5) {
 			movementSpeed = 0;
 		}
 
 		else {
 
-			if (enemy.getCenterX() >= centerX) {
+			if (player.getCenterX() >= centerX) {
 				movementSpeed = 1;
 			} else {
 				movementSpeed = -1;

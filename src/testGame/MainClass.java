@@ -167,9 +167,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	@Override
 	public void run() {
 		if (state == GameState.Running) {
-			int wave_counter = 0;
 			while (true) {
-				if(wave_counter == 0 && enemies.size() < 10) {
+				if(enemies.size() == 0) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
 						BasicSprite enemySprite = e.getSprite();
@@ -177,8 +176,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 						hanim.addFrame(enemyImage, 100);
 					}
 				}
-				wave_counter = 1;
-				//wave_counter = wave_counter ++ % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
 				
