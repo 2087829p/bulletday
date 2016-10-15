@@ -6,4 +6,16 @@ public class EnemyProjectile extends Projectile{
 		super(startX, startY, sX, sY);
 	}
 
+	public void checkCollision(){
+		if(collides(MainClass.getCharacter())){
+			MainClass.getCharacter().setHealth(-1);
+			die();
+		}
+	}
+	
+	@Override
+	public void die() {
+		super.die();
+		MainClass.projectiles.remove(this);
+	}
 }

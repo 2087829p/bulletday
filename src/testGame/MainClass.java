@@ -22,9 +22,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
-
-	GameState state = GameState.Running;
-
+	public static ArrayList<Projectile> projectiles;
+	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
 	private Image image, currentSprite, character, character2, character3,
 			background, heliboy;
@@ -40,7 +39,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
 	public static int score = 0;
 	private Font font = new Font(null, Font.BOLD, 30);
-
+	public static List<EnemyProjectile> enemy_projectiles;
+	public static List<PlayerProjectile> player_projectiles;
 	@Override
 	public void init() {
 		setSize(480, 800);
@@ -169,8 +169,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			while (true) {
 				spaceship.update();
 				currentSprite = anim.getImage();
-				
-				ArrayList<Projectile> projectiles = spaceship.getProjectiles();
 				for (int i = 0; i < projectiles.size(); i++) {
 					Projectile p = (Projectile) projectiles.get(i);
 					if (p.isVisible()) {
@@ -316,6 +314,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	public static void setGameState(GameState newState){
+		state=newState;
 	}
 
 }

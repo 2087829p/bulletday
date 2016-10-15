@@ -4,34 +4,64 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 
-public class Character extends Entity{
-	final int MOVESPEED = 5;
-	final int GROUND = 382;
+import testGame.MainClass.GameState;
 
+public class Character extends Entity{
+	private final int DEFAULT_PLAYER_HEALTH=3;
+	final int MOVESPEED = 5;	
+	int health;
 	private boolean movingLeft = false;
 	private boolean movingRight = false;
 	private boolean movingForward = false;
 	private boolean movingBack = false;
 	private boolean readyToFire = true;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
+	
 	private static Background bg1 = MainClass.getBg1();
 	private static Background bg2 = MainClass.getBg2();
 	
+
 	public Character(int centerX, int centerY) {
         super(centerX, centerY, new CharacterSprite(centerX, centerY));
+        this.health=DEFAULT_PLAYER_HEALTH;
     }
 	
 	public void shoot() {
 		if (readyToFire) {
-			Projectile p = new PlayerProjectile(centerX + 50, centerY - 25, 10, 0);
+			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
+					centerY + sprite.getShape().height , speedX, speedY + 10);
 			projectiles.add(p);
 		}
 	}
-
-	public ArrayList getProjectiles() {
+	
+	@Override
+	public void update(){
+		super.update();
+		for(Projectile p : projectiles) {
+			p.update();
+		}
+	}
+	
+	public void setHealth(int health){
+		this.health+=health;
+		if(this.health<=0){
+			die();
+		}
+	}
+	public int getHealth(){
+		return health;
+	}
+	public void die(){
+		MainClass.setGameState(GameState.Dead);
+	}
+	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
 
+	public void removeProjectile(Projectile p) {
+		projectiles.remove(p);
+	}
+	
 	public void moveRight() {
 		speedX = MOVESPEED;
 	}
