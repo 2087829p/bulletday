@@ -13,6 +13,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import framework.Animation;
@@ -181,7 +182,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 					if (p.isVisible()) {
 						p.update();
 					} else {
-						projectiles.remove(p);
+						//projectiles.remove(p);
 					}
 				}
 				updateTiles();
