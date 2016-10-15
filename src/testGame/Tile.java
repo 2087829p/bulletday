@@ -8,7 +8,7 @@ public class Tile {
 	public Image tileImage;
 
 	private Background bg = MainClass.getBg1();
-	private Character robot = MainClass.getCharecter();
+	private Character robot = MainClass.getCharacter();
 	private Rectangle r;
 
 	public Tile(int x, int y, int typeInt) {

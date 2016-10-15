@@ -3,11 +3,15 @@ package testGame;
 import java.awt.Rectangle;
 
 public class Enemy {
-	private int maxHealth, currentHealth, power, speedX, centerX, centerY;
+	int health;
+	private int speedX;
+	private int centerX;
+	private int centerY;
+	private int numOfBullets;
+	private int rateOfFire;
 	private Background bg = MainClass.getBg1();
-	private Character robot = MainClass.getCharecter();
+	private Character enemy = MainClass.getCharacter();
 	public Rectangle r = new Rectangle(0, 0, 0, 0);
-	public int health = 5;
 	private int movementSpeed;
 
 	// Behavioral Methods
@@ -38,13 +42,13 @@ public class Enemy {
 			movementSpeed = 0;
 		}
 
-		else if (Math.abs(robot.getCenterX() - centerX) < 5) {
+		else if (Math.abs(enemy.getCenterX() - centerX) < 5) {
 			movementSpeed = 0;
 		}
 
 		else {
 
-			if (robot.getCenterX() >= centerX) {
+			if (enemy.getCenterX() >= centerX) {
 				movementSpeed = 1;
 			} else {
 				movementSpeed = -1;
@@ -55,22 +59,6 @@ public class Enemy {
 
 	public void die() {
 
-	}
-
-	public void attack() {
-
-	}
-
-	public int getMaxHealth() {
-		return maxHealth;
-	}
-
-	public int getCurrentHealth() {
-		return currentHealth;
-	}
-
-	public int getPower() {
-		return power;
 	}
 
 	public int getSpeedX() {
@@ -87,18 +75,6 @@ public class Enemy {
 
 	public Background getBg() {
 		return bg;
-	}
-
-	public void setMaxHealth(int maxHealth) {
-		this.maxHealth = maxHealth;
-	}
-
-	public void setCurrentHealth(int currentHealth) {
-		this.currentHealth = currentHealth;
-	}
-
-	public void setPower(int power) {
-		this.power = power;
 	}
 
 	public void setSpeedX(int speedX) {

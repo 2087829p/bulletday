@@ -30,7 +30,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			heliboy3, heliboy4, heliboy5;
 	private Graphics second;
 	private URL base;
-	private static Character robot;
+	private static Character spaceship;
 	public static Heli h1, h2;
 	private Animation anim, hanim;
 	private static Background bg1, bg2;
@@ -49,11 +49,13 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame f = (Frame) this.getParent().getParent();
 		f.setTitle("Game Test");
+		
 		try {
 			base = getDocumentBase();
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
+		
 		// Image Setups
 		character = getImage(base, "data/character.png");
 		character2 = getImage(base, "data/character2.png");
@@ -100,7 +102,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void start() {
 		bg1 = new Background(0, 0);
 		bg2 = new Background(2160, 0);
-		robot = new Character();
+		spaceship = new Character();
 		// for (int i = 0; i < 200; i++) {
 		// for (int j = 0; j < 12; j++) {
 		// if (j == 11) {
@@ -191,14 +193,14 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void run() {
 		if (state == GameState.Running) {
 			while (true) {
-				robot.update();
-				if (robot.isJumped()) {
+				spaceship.update();
+				if (spaceship.isJumped()) {
 					currentSprite = characterJumped;
-				} else if (robot.isJumped() == false
-						&& robot.isDucked() == false) {
+				} else if (spaceship.isJumped() == false
+						&& spaceship.isDucked() == false) {
 					currentSprite = anim.getImage();
 				}
-				ArrayList projectiles = robot.getProjectiles();
+				ArrayList projectiles = spaceship.getProjectiles();
 				for (int i = 0; i < projectiles.size(); i++) {
 					Projectile p = (Projectile) projectiles.get(i);
 					if (p.isVisible()) {
@@ -219,7 +221,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				if (robot.getCenterY() > 500) {
+				if (spaceship.getCenterY() > 500) {
 					state = GameState.Dead;
 				}
 			}
@@ -240,15 +242,15 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		g.drawImage(background, bg2.getBgX(), bg2.getBgY(), this);
 		paintTiles(g);
 
-		ArrayList<Projectile> projectiles = robot.getProjectiles();
+		ArrayList<Projectile> projectiles = spaceship.getProjectiles();
 		for (int i = 0; i < projectiles.size(); i++) {
 			Projectile p = (Projectile) projectiles.get(i);
 			g.setColor(Color.YELLOW);
 			g.fillRect(p.getX(), p.getY(), 10, 5);
 		}
 
-		g.drawImage(currentSprite, robot.getCenterX() - 61,
-				robot.getCenterY() - 63, this);
+		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
+				spaceship.getCenterY() - 63, this);
 		g.drawImage(hanim.getImage(), h1.getCenterX() - 48,
 				h1.getCenterY() - 48, this);
 		g.drawImage(hanim.getImage(), h2.getCenterX() - 48,
@@ -289,29 +291,29 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 		case KeyEvent.VK_DOWN:
 			currentSprite = characterDown;
-			if (robot.isJumped() == false) {
-				robot.setDucked(true);
-				robot.setSpeedX(0);
+			if (spaceship.isJumped() == false) {
+				spaceship.setDucked(true);
+				spaceship.setSpeedX(0);
 			}
 			break;
 
 		case KeyEvent.VK_LEFT:
-			robot.moveLeft();
-			robot.setMovingLeft(true);
+			spaceship.moveLeft();
+			spaceship.setMovingLeft(true);
 			break;
 
 		case KeyEvent.VK_RIGHT:
-			robot.moveRight();
-			robot.setMovingRight(true);
+			spaceship.moveRight();
+			spaceship.setMovingRight(true);
 			break;
 
 		case KeyEvent.VK_SPACE:
-			robot.jump();
+			spaceship.jump();
 			break;
 		case KeyEvent.VK_CONTROL:
-			if (robot.isDucked() == false && robot.isJumped() == false) {
-				robot.shoot();
-				robot.setReadyToFire(false);
+			if (spaceship.isDucked() == false && spaceship.isJumped() == false) {
+				spaceship.shoot();
+				spaceship.setReadyToFire(false);
 			}
 			break;
 		}
@@ -327,21 +329,21 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 		case KeyEvent.VK_DOWN:
 			currentSprite = anim.getImage();
-			robot.setDucked(false);
+			spaceship.setDucked(false);
 			break;
 
 		case KeyEvent.VK_LEFT:
-			robot.stopLeft();
+			spaceship.stopLeft();
 			break;
 
 		case KeyEvent.VK_RIGHT:
-			robot.stopRight();
+			spaceship.stopRight();
 			break;
 
 		case KeyEvent.VK_SPACE:
 			break;
 		case KeyEvent.VK_CONTROL:
-			robot.setReadyToFire(true);
+			spaceship.setReadyToFire(true);
 			break;
 		}
 
@@ -361,8 +363,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		return bg2;
 	}
 
-	public static Character getCharecter() {
-		return robot;
+	public static Character getCharacter() {
+		return spaceship;
 	}
 
 }
