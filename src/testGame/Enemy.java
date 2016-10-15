@@ -16,7 +16,7 @@ public class Enemy {
 	
 	public void Enemy (int centerX, int centerY, int speedX, int numOfBullets, int rateOfFire, 
 			int movementSpeed){
-	
+	 
 		this.centerX = centerX;
 		this.centerY = centerY;
 		this.numOfBullets = numOfBullets;

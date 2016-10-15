@@ -124,7 +124,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		h1 = new Heli(340, 360);
 		h2 = new Heli(700, 360);
 
-		Thread t = new Thread(this);
+		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
 		// super.start();
 	}
@@ -194,13 +194,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		if (state == GameState.Running) {
 			while (true) {
 				spaceship.update();
-				if (spaceship.isJumped()) {
-					currentSprite = characterJumped;
-				} else if (spaceship.isJumped() == false
-						&& spaceship.isDucked() == false) {
-					currentSprite = anim.getImage();
-				}
-				ArrayList projectiles = spaceship.getProjectiles();
+				currentSprite = anim.getImage();
+				
+				ArrayList<Projectile> projectiles = spaceship.getProjectiles();
 				for (int i = 0; i < projectiles.size(); i++) {
 					Projectile p = (Projectile) projectiles.get(i);
 					if (p.isVisible()) {
@@ -227,9 +223,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			}
 		}
 		// TODO Auto-generated method stub
-
 	}
-
+	
 	public void animate() {
 		anim.update(10);
 		hanim.update(50);
@@ -286,15 +281,13 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			System.out.println("Move up");
+			spaceship.moveForward();
+			spaceship.setMovingForward(true);
 			break;
 
 		case KeyEvent.VK_DOWN:
-			currentSprite = characterDown;
-			if (spaceship.isJumped() == false) {
-				spaceship.setDucked(true);
-				spaceship.setSpeedX(0);
-			}
+			spaceship.moveBack();
+			spaceship.setMovingBack(true);
 			break;
 
 		case KeyEvent.VK_LEFT:
@@ -308,28 +301,21 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			break;
 
 		case KeyEvent.VK_SPACE:
-			spaceship.jump();
-			break;
-		case KeyEvent.VK_CONTROL:
-			if (spaceship.isDucked() == false && spaceship.isJumped() == false) {
-				spaceship.shoot();
-				spaceship.setReadyToFire(false);
-			}
+			spaceship.shoot();
+			spaceship.setReadyToFire(false);
 			break;
 		}
-
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
 		switch (e.getKeyCode()) {
 		case KeyEvent.VK_UP:
-			System.out.println("Stop moving up");
+			spaceship.stopForward();
 			break;
 
 		case KeyEvent.VK_DOWN:
-			currentSprite = anim.getImage();
-			spaceship.setDucked(false);
+			spaceship.stopBack();
 			break;
 
 		case KeyEvent.VK_LEFT:
@@ -341,18 +327,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			break;
 
 		case KeyEvent.VK_SPACE:
-			break;
-		case KeyEvent.VK_CONTROL:
 			spaceship.setReadyToFire(true);
 			break;
 		}
-
-	}
-
-	@Override
-	public void keyTyped(KeyEvent e) {
-		// TODO Auto-generated method stub
-
 	}
 
 	public static Background getBg1() {
@@ -365,6 +342,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	public static Character getCharacter() {
 		return spaceship;
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

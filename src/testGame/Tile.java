@@ -85,7 +85,6 @@ public class Tile {
 
 		if (rbot.intersects(r) && type == 8) {
 			if (type == 8) {
-				robot.setJumped(false);
 				robot.setSpeedY(0);
 				robot.setCenterY(tileY - 63);
 			}
