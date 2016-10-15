@@ -32,4 +32,36 @@ public class Entity {
     public BasicSprite getSprite() {
         return this.sprite;
     }
+
+    public int getCenterX() {
+        return centerX;
+    }
+
+    public void setCenterX(int x){
+        this.centerX = x;
+    }
+
+    public int getCenterY() {
+        return centerY;
+    }
+
+    public void setCenterY(int y) {
+        this.centerY = y;
+    }
+    
+    public int getSpeedX() {
+        return speedX;
+    }
+
+    public void setSpeedX(int x) {
+        this.speedX = x;
+    }
+
+    public int getSpeedY() {
+        return speedY;
+    }
+
+    public void setSpeedY(int y) {
+        this.speedY = y;
+    }
 }

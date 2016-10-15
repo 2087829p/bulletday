@@ -93,38 +93,6 @@ public class Character extends Entity{
 		this.readyToFire = readyToFire;
 	}
 
-	public int getCenterX() {
-		return centerX;
-	}
-
-	public int getCenterY() {
-		return centerY;
-	}
-
-	public int getSpeedX() {
-		return speedX;
-	}
-
-	public int getSpeedY() {
-		return speedY;
-	}
-
-	public void setCenterX(int centerX) {
-		this.centerX = centerX;
-	}
-
-	public void setCenterY(int centerY) {
-		this.centerY = centerY;
-	}
-
-	public void setSpeedX(int speedX) {
-		this.speedX = speedX;
-	}
-
-	public void setSpeedY(int speedY) {
-		this.speedY = speedY;
-	}
-
 	public boolean isMovingRight() {
 		return movingRight;
 	}
