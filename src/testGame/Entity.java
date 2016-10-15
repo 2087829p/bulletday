@@ -7,6 +7,7 @@ public class Entity {
     protected int centerY;
     protected int speedX;
     protected int speedY;
+    
     public Entity(int x, int y, BasicSprite sprite) {
         this.centerX = x;
         this.centerY = y;

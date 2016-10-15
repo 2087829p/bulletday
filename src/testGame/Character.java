@@ -16,8 +16,11 @@ public class Character extends Entity{
 	private boolean movingBack = false;
 	private boolean readyToFire = true;
 	private ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-	//private static Background bg1 = MainClass.getBg1();
-	//private static Background bg2 = MainClass.getBg2();
+	
+	private static Background bg1 = MainClass.getBg1();
+	private static Background bg2 = MainClass.getBg2();
+	
+
 	public Character(int centerX, int centerY) {
         super(centerX, centerY, new CharacterSprite(centerX, centerY));
         this.health=DEFAULT_PLAYER_HEALTH;
@@ -51,7 +54,7 @@ public class Character extends Entity{
 	public void die(){
 		MainClass.setGameState(GameState.Dead);
 	}
-	public ArrayList getProjectiles() {
+	public ArrayList<Projectile> getProjectiles() {
 		return projectiles;
 	}
 

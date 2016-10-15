@@ -27,6 +27,10 @@ public class BasicSprite {
     public Rectangle getShape() {
         return this.shape;
     }
+    
+    public BufferedImage getSprite() {
+    	return this.sprite;
+    }
 
     public boolean collides(BasicSprite b) {
         return b.getShape().intersects(shape);
