@@ -68,7 +68,7 @@ public class Character {
 
 	public void shoot() {
 		if (readyToFire) {
-			Projectile p = new PlayerProjectile(centerX + 50, centerY - 25, 0, -5);
+			Projectile p = new PlayerProjectile(centerX + 50, centerY - 25, 10, 0);
 			projectiles.add(p);
 		}
 	}

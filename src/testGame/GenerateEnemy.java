@@ -50,12 +50,14 @@ public class GenerateEnemy {
             path = generate_num(4) - 1; // TODO Change to amount of paths
         }
         Enemy[] ret = new Enemy[count];
-        
+        double x_spacing = GameMap.BOX_WIDTH;
+        x_spacing /= count + 1;
         for(int i = 0; i < count; i ++) {
-            
-            ret[i] = new Enemy(); // TODO set up constructor
+            double x = 0.5 * x_spacing;
+            x += x_spacing * i;
+            Double X = new Double(x);
+            ret[i] = new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
         }
-        
         return ret;
     }
 
@@ -66,11 +68,13 @@ public class GenerateEnemy {
         power -= bullets;
         if(power < 0)
             power = 1;
-        int bullet_speed = generate_num(power);
+        int bullet_rate = generate_num(power);
         power -= bullets;
         if(power < 0)
             power = 1;
         int speed = power;
-        return new Enemy(); // TODO set up constructor
+        double x = rng.nextDouble() * (GameMap.BOX_WIDTH / 2) + (GameMap.BOX_WIDTH / 4);
+        Double X = new Double(x);
+        return new Enemy(X.intValue(), 0, speed, bullets, bullet_rate, speed);
     }
 }
