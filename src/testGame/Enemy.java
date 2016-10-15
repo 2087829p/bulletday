@@ -103,7 +103,8 @@ public class Enemy extends Entity {
 	}
 	
 	public void die() {
-
+		MainClass.enemies_in_scene.remove(this);
+		MainClass.enemies.remove(this);
 	}
 
 	public Background getBg() {
