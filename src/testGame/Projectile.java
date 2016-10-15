@@ -21,4 +21,16 @@ public class Projectile extends Entity{
 	public void setVisible(boolean visible) {
 		this.visible = visible;
 	}
+	
+	@Override
+	public void update() {
+		super.update();
+		if(this.centerY > GameMap.BOX_HIEGHT || this.centerY < 0) {
+			die();
+		}
+	}
+	
+	public void die() {
+		// do something (should be overriden)
+	}
 }
