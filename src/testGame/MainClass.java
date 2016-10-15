@@ -169,7 +169,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		if (state == GameState.Running) {
 			int wave_counter = 0;
 			while (true) {
-				if(wave_counter == 0) {
+				if(wave_counter < 0) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
 						enemies_in_scene.add(e);
