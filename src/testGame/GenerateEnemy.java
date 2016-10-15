@@ -1,7 +1,7 @@
 package testGame;
 
 import java.util.Random;
-import java.Math;
+import java.lang.Math;
 
 public class GenerateEnemy {
     public static Random rng;
@@ -50,11 +50,14 @@ public class GenerateEnemy {
             path = generate_num(4) - 1; // TODO Change to amount of paths
         }
         Enemy[] ret = new Enemy[count];
-        
+        double x_spacing = GameMap.BOX_WIDTH;
+        x_spacing /= count + 1;
         for(int i = 0; i < count; i ++) {
-            
-            Enemy[i] = new Enemy(); // TODO set up constructor
+            double x = 0.5 * x_spacing;
+            x += x_spacing * i;
+            ret[i] = new Enemy(); // TODO set up constructor
         }
+        return ret;
     }
 
     // Generates a single enemy

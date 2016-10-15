@@ -1,3 +1,5 @@
+package testGame;
+
 public class GameMap {
     public Background background;
     // TODO Choose actual box size
