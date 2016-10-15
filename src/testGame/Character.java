@@ -32,8 +32,8 @@ public class Character extends Entity{
 	public void shoot() {
 		System.out.println(delay);
 		if (isReadyToFire()) {
-			Projectile p = new PlayerProjectile(centerX + (sprite.getShape().width/2), 
-					centerY + sprite.getShape().height , speedX, speedY - 10);
+			Projectile p = new PlayerProjectile(centerX, 
+					centerY - sprite.getShape().height , speedX, -speedY - 10);
 			projectiles.add(p);
 			AudioHandler.playSound("data/laser12.wav");
 			delay=FIRE_DELAY;
