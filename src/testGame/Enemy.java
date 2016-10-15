@@ -61,26 +61,7 @@ public class Enemy extends Entity {
 			updateCount = 100 - rateOfFire;
 		}
 		updateCount --;
-		delay--;
-        if(collides(player)){
-        	System.out.print("Collision");
-            this.die();
-            player.setHealth(PLAYER_COLLISION_DAGAME);
-        } else {
-        	int p = 0;
-        	while(p < player.getProjectiles().size()) {
-        		if(collides(player.getProjectiles().get(p))){
-        			this.die();
-        			player.getProjectiles().get(p).die();
-        			System.out.print("Collision");
-        			break;
-        		}
-    			else {
-        			p ++;
-        		}
-        	}
-        }
-        
+		delay--;        
 	}
 
     public void shoot() {
