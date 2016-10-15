@@ -3,6 +3,8 @@ package testGame;
 import java.awt.Rectangle;
 
 public class Enemy extends Entity {
+	private final int PLAYER_COLLISION_DAGAME=-1;
+	private final int DEFAULT_HEALTH=1;
 	int health;
 	private int speedX;
 	private int centerX;
@@ -19,7 +21,7 @@ public class Enemy extends Entity {
 		this.numOfBullets = numOfBullets;
 		this.rateOfFire = rateOfFire;
 		this.movementSpeed = movementSpeed;
-		
+		this.health=DEFAULT_HEALTH;
 	}
 	
 	// Behavioral Methods
@@ -32,7 +34,8 @@ public class Enemy extends Entity {
 		
 		speedX = bg.getSpeedX() * 5;
         if(collides(enemy)){
-            // DO SOMETHING
+            this.die();
+            enemy.setHealth(PLAYER_COLLISION_DAGAME);
         }
 	}
 
@@ -57,7 +60,7 @@ public class Enemy extends Entity {
 		}
 
 	}
-
+	
 	public void die() {
 
 	}
@@ -69,5 +72,10 @@ public class Enemy extends Entity {
 	public void setBg(Background bg) {
 		this.bg = bg;
 	}
-
+	public void setHealth(int amount){
+		health+=amount;
+		if(health<=0){
+			die();
+		}
+	}
 }
