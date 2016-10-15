@@ -49,7 +49,7 @@ public class GenerateEnemy {
             double x = 0.5 * x_spacing;
             x += x_spacing * i;
             Double X = new Double(x);
-            ret[i] = new Enemy(X.intValue(), 125, speed, bullets, bullet_rate, speed);
+            ret[i] = new Enemy(170, 100, speed, bullets, bullet_rate, speed);
         }
         return ret;
     }

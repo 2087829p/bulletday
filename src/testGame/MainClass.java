@@ -172,9 +172,13 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if(wave_counter == 0 && enemies.size() < 10) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
+						BasicSprite enemySprite = e.getSprite();
+						Image enemyImage = enemySprite.getSprite();
+						hanim.addFrame(enemyImage, 100);
 					}
 				}
-				wave_counter = wave_counter ++ % 30;
+				wave_counter = 1;
+				//wave_counter = wave_counter ++ % 30;
 				spaceship.update();
 				currentSprite = anim.getImage();
 				
@@ -223,6 +227,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
 				spaceship.getCenterY() - 63, this);
+		for(Enemy e : enemies){
+			g.drawImage(e.getSprite().getSprite(), e.getCenterX(), e.getCenterY(), this);
+		}
 		g.setFont(font);
 		g.setColor(Color.WHITE);
 		g.drawString(Integer.toString(score), 740, 30);
