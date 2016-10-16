@@ -1,7 +1,5 @@
 package testGame;
 
-import java.awt.Rectangle;
-
 public class Projectile extends Entity{
 	private boolean visible;
 	final int DEFAULT_DAMAGE=1;

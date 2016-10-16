@@ -292,19 +292,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if(i >= scoreBoard.getList().size()) {
 					break;
 				}
-				g.drawString(i + ": " + s.toString(), 200, 90 + 30 * i);
+				g.drawString((i + 1) + ": " + s.toString(), 200, 90 + 30 * i);
 				i ++;
 				if(i == 10) {
 					break;
 				}
 			}
-			g.drawString("Dead", WIDTH/2, 240);
-		}else{
-			scoreBoard.addScore(score);
-			scoreBoard.saveScores();
-			String top10 = scoreBoard.getN(10);
-			g.drawString(top10, 320, 100);
-			
 		}
 	}
 
