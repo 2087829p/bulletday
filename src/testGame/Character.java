@@ -30,7 +30,6 @@ public class Character extends Entity{
     }
 	
 	public void shoot() {
-		System.out.println(delay);
 		if (isReadyToFire()) {
             if(noProjectiles == 1) {
     			Projectile p = new PlayerProjectile(sprite.shape.x + sprite.shape.width/2, 

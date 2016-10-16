@@ -204,8 +204,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 						hanim.addFrame(enemyImage, 100);
 					}
 					
-					int spawnPU = r.nextInt(10);
-					if(spawnPU > 1){
+					int spawnPU = r.nextInt(3);
+					if(spawnPU == 1){
 						PowerUp up = new PowerUp(r.nextInt(400)+40, 100);
 						powerups.add(up);
 						BasicSprite upSprite = up.getSprite();
