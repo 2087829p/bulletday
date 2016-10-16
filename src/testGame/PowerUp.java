@@ -24,7 +24,7 @@ public class PowerUp extends Entity{
 		if(sprite.collides(MainClass.getCharacter().sprite)){
 			System.out.println("Collided");
 			switch(typeOfPU){
-			case 0: //theCharacter.incDamage();
+			case 0: theCharacter.incHealth();
 					break;
 			case 1: theCharacter.incProjNum();
 					break;
