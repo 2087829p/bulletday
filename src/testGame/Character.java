@@ -33,14 +33,14 @@ public class Character extends Entity{
 		System.out.println(delay);
 		if (isReadyToFire()) {
             if(noProjectiles == 1) {
-    			Projectile p = new PlayerProjectile(centerX, 
-					centerY - sprite.getShape().height , speedX, -15);
+    			Projectile p = new PlayerProjectile(sprite.shape.x + sprite.shape.width/2, 
+					sprite.shape.y, speedX, -15);
 			    projectiles.add(p);
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];
                 for(int i = 0; i < noProjectiles; i ++) {
                     int mid = noProjectiles/2;
-                    projectiles.add(new PlayerProjectile(centerX, centerY - sprite.getShape().height,
+                    projectiles.add(new PlayerProjectile(sprite.shape.x + sprite.shape.width/2, centerY - sprite.getShape().height,
                     speedX + ((mid - i) % mid )- mid, -15)); // Gives some spread 
                 }
             }

@@ -160,7 +160,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				
 				if (i < line.length()) {
 					char ch = line.charAt(i);
-					System.out.println(line.charAt(i) + "is i ");
 					Tile t = new Tile(i, j, java.lang.Character.getNumericValue(ch));
 					tilearray.add(t);
 				}
@@ -289,8 +288,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		}
 		//ADD DRAW SPRITE HERE
 		
-		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
-				spaceship.getCenterY() - 63, this);
+		g.drawImage(currentSprite, spaceship.sprite.shape.x,
+				spaceship.sprite.shape.y, this);
 		g.drawRect(spaceship.sprite.shape.x, spaceship.sprite.shape.y, spaceship.sprite.shape.width, spaceship.sprite.shape.height);
 		for(Enemy e : enemies){
 			g.drawImage(e.getSprite().getSprite(), e.getCenterX(), e.getCenterY(), this);
@@ -319,11 +318,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				hasSubmited = true;
 			}
 			int i = 0;
+			g.drawString("Your Score: " + score + "", 200, 90);
 			for(Integer s : scoreBoard.getList()) {
 				if(i >= scoreBoard.getList().size()) {
 					break;
 				}
-				g.drawString((i + 1) + ": " + s.toString(), 200, 90 + 30 * i);
+				g.drawString((i + 1) + ": " + s.toString(), 200, 120 + 30 * i);
 				i ++;
 				if(i == 10) {
 					break;
