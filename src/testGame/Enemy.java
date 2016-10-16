@@ -101,7 +101,7 @@ public class Enemy extends Entity {
     		for(double a : angle) {    		
     		Double xSpeed = new Double(Math.cos(a) * 2 * this.movementSpeed);
     		EnemyProjectile bullet = new EnemyProjectile(this.centerX+(sprite.width/2), 
-    				this.centerY+(sprite.height-5), this.speedX + xSpeed.intValue(), 2);
+    				this.centerY+(sprite.height-5), xSpeed.intValue(), Math.min(4, (this.speedY + 2)));
     		MainClass.enemy_projectiles.add(bullet);
     		delay=DEFAULT_DELAY;
     		}
