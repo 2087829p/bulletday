@@ -42,7 +42,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private Animation anim, hanim;
 	private static Background bg1, bg2;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
-			tilegrassRight, tiledirt;
+			tilegrassRight, tiledirt, space_heart;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
@@ -57,7 +57,6 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		
 		splashScreen();
 
-	
 		setSize(480, 640);
 		setBackground(Color.BLACK);
 		setFocusable(true);
@@ -80,6 +79,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		tilegrassBot = getImage(base, "data/tilegrassbot.png");
 		tilegrassLeft = getImage(base, "data/tilegrassleft.png");
 		tilegrassRight = getImage(base, "data/tilegrassright.png");
+		space_heart = getImage(base, "data/space_heart2.png");
 
 		anim = new Animation();
 		
@@ -276,6 +276,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		g.setColor(Color.WHITE);
 		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 		g2.drawString(("Multiplier: " + multiplier + "     " + "Your score: " +  Integer.toString(score)), 20, 30);
+		
+		g2.drawString("Lives: ", 20, 70);
+		for (int i = 0; i<spaceship.health;i++){			
+			g.drawImage(space_heart, (100 + i*30), 50, this);
+		}
+		
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
