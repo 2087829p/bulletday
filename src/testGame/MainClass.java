@@ -17,6 +17,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -52,6 +53,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public static ArrayList<EnemyProjectile> enemy_projectiles = new ArrayList<EnemyProjectile>();
 	private Font font = new Font("TimesRoman", Font.BOLD, 30);
 	public static List<PlayerProjectile> player_projectiles;
+	public static ArrayList<PowerUp> powerups= new ArrayList<PowerUp>();
+	public Random r = new Random();
 	@Override
 	public void init() {
 		
@@ -201,7 +204,18 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 						Image enemyImage = enemySprite.getSprite();
 						hanim.addFrame(enemyImage, 100);
 					}
+					
+					int spawnPU = r.nextInt(10);
+					if(spawnPU > 1){
+						PowerUp up = new PowerUp(r.nextInt(400)+40, 100);
+						powerups.add(up);
+						BasicSprite upSprite = up.getSprite();
+						Image upImage = upSprite.getSprite();
+						hanim.addFrame(upImage,100);
+						
+					}
 				}
+			  
 				spaceship.update();
 				currentSprite = anim.getImage();
 				int projectilePointer = 0;
@@ -263,6 +277,13 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			Projectile p = (Projectile) enemyProjectiles.get(i);
 			g.drawImage(p.getSprite().getSprite(), p.getCenterX(), p.getCenterY(), this);
 		}
+		
+		ArrayList<PowerUp> powerUps = powerups;
+		for(int i = 0; i < powerUps.size(); i++){
+			PowerUp p = (PowerUp) powerUps.get(i);
+			g.drawImage(p.getSprite().getSprite(), p.getCenterX(), p.getCenterY(), this);
+		}
+		//ADD DRAW SPRITE HERE
 		
 		g.drawImage(currentSprite, spaceship.getCenterX() - 61,
 				spaceship.getCenterY() - 63, this);
