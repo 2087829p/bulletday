@@ -34,7 +34,7 @@ public class Character extends Entity{
 		if (isReadyToFire()) {
             if(noProjectiles == 1) {
     			Projectile p = new PlayerProjectile(centerX, 
-					centerY - sprite.getShape().height , 2*speedX, -15);
+					centerY - sprite.getShape().height , speedX, -15);
 			    projectiles.add(p);
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];

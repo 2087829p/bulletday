@@ -26,7 +26,6 @@ public class ScoreBoard {
 					e.printStackTrace();
 				}
 				while(l != "" && l != null) {
-					System.out.println(l);
 					try {
 						scores.add(new Integer(Integer.parseInt(l)));
 						l = r.readLine();
@@ -34,7 +33,6 @@ public class ScoreBoard {
 						e.printStackTrace();
 					}
 				}
-				System.out.println(scores.toString());
 				try {
 				r.close();
 				} catch (Exception e) {
@@ -72,7 +70,6 @@ public class ScoreBoard {
 		try {
 			r = new BufferedWriter(new FileWriter(FILENAME));
 			r.write(sb);
-			System.out.println(sb);
 			r.close();
 		} catch (Exception e) {
 			e.printStackTrace();
