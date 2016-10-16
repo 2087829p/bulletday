@@ -18,7 +18,7 @@ public class PowerUp extends Entity{
 	public void update(){
 		super.update();
 		sprite.move(centerX, centerY, sprite.width, sprite.height);
-		if(this.centerY > 640){
+		if(this.centerY > GameMap.BOX_HIEGHT-30){
 			die();
 		}
 		if(sprite.collides(MainClass.getCharacter().sprite)){
