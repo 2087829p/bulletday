@@ -47,7 +47,9 @@ public class PowerUp extends Entity{
 	public ArrayList<String> getActivePowers(){
 		return powerupsActive;
 	}
-	
+	public void clearPowerUps(){
+		powerupsActive.clear();
+	}
 	public void die(){
 		MainClass.powerups.remove(this);
 	}

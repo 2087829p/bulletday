@@ -17,7 +17,9 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Queue;
 import java.util.Random;
+import java.util.concurrent.LinkedBlockingQueue;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -32,6 +34,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	enum GameState {
 		Running, Dead
 	}
+	int display_delay;
+	final int DEFAULT_DISPLAY_DELAY=60;
 	private boolean hasSubmited = false;
 	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
@@ -54,7 +58,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private Font font = new Font("TimesRoman", Font.BOLD, 30);
 	public static List<PlayerProjectile> player_projectiles;
 	public static ArrayList<PowerUp> powerups= new ArrayList<PowerUp>();
-	public static ArrayList<String> powerupsActive = new ArrayList<String>();
+	public static LinkedBlockingQueue<String> powerupsActive = new LinkedBlockingQueue<String>();
 	public Random r = new Random();
 	@Override
 	public void init() {
@@ -67,7 +71,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		addKeyListener(this);
 		Frame f = (Frame) this.getParent().getParent();
 		f.setTitle("Bulletday");
-		
+		display_delay=DEFAULT_DISPLAY_DELAY;
 		try {
 			base = getDocumentBase();
 		} catch (Exception e) {
@@ -306,10 +310,18 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		for (int i = 0; i<spaceship.health;i++){			
 			g.drawImage(space_heart, (100 + i*30), 50, this);
 		}
-		
-		for(String powerUp : powerupsActive){
+		//////////////////////////////////////
+		if(display_delay>0){
+		 if(powerupsActive.size()>0){
+			String powerUp=powerupsActive.peek();
 			g.drawString(powerUp, 100, 100);
+			display_delay--;
+		 }
+		}else{
+			powerupsActive.poll();
+			display_delay=DEFAULT_DISPLAY_DELAY;
 		}
+		////////////////////////////////
 		
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
@@ -442,7 +454,11 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	}
 	
 	public static void addToActivePowerups(String pup){
-		powerupsActive.add(pup);
+		try {
+			powerupsActive.put(pup);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 	}
 
 }
