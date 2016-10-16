@@ -234,6 +234,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 					e.update();
 					i += 1 - size + enemies.size();
 				}
+				for(int x=0; x<powerups.size();x++){
+					PowerUp p = powerups.get(x);
+					p.update();
+				}
 				animate();
 				repaint();
 				try {
@@ -278,9 +282,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.drawImage(p.getSprite().getSprite(), p.getCenterX(), p.getCenterY(), this);
 		}
 		
-		ArrayList<PowerUp> powerUps = powerups;
-		for(int i = 0; i < powerUps.size(); i++){
-			PowerUp p = (PowerUp) powerUps.get(i);
+		for(int i = 0; i < powerups.size(); i++){
+			PowerUp p = (PowerUp) powerups.get(i);
 			g.drawImage(p.getSprite().getSprite(), p.getCenterX(), p.getCenterY(), this);
 		}
 		//ADD DRAW SPRITE HERE
