@@ -10,6 +10,7 @@ public class ScoreBoard {
 	private static final String FILENAME = "scoreboard.txt";
 	public ScoreBoard(){
 		File f = new File(FILENAME);
+		scores = new ArrayList<Integer>();
 		if(f.isFile()){
 			BufferedReader r = null;
 			try {
@@ -24,7 +25,7 @@ public class ScoreBoard {
 				} catch (Exception e){
 					e.printStackTrace();
 				}
-				while(! l.isEmpty()) {
+				while(l == "") {
 					scores.add(new Integer(l));
 					try {
 						l = r.readLine();
@@ -43,6 +44,9 @@ public class ScoreBoard {
 	public String toString() {
 		return getNtoM(0,scores.size());
 	}
+	public ArrayList<Integer> getList() {
+		return scores;
+	}
 	
 	public String getN(int n){
 		return getNtoM(0,n);
@@ -59,7 +63,8 @@ public class ScoreBoard {
 		BufferedWriter r = null;
 		try {
 			r = new BufferedWriter(new FileWriter(FILENAME));
-			r.write(sb.toString());
+			r.write(sb);
+			System.out.println(sb);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

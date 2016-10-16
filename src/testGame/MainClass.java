@@ -24,12 +24,14 @@ import javax.swing.JWindow;
 import javax.swing.SwingConstants;
 
 import framework.Animation;
+import framework.AudioHandler;
 
 public class MainClass extends Applet implements Runnable, KeyListener {
 
 	enum GameState {
 		Running, Dead
 	}
+	private boolean hasSubmited = false;
 	public static ArrayList<Projectile> projectiles=new ArrayList<Projectile>();
 	static GameState state = GameState.Running;
 	private static final long serialVersionUID = 1L;
@@ -85,6 +87,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		hanim.addFrame(heliboy, 100);
 
 		currentSprite = anim.getImage();
+		
 	}
 
 	@Override
@@ -103,7 +106,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		AudioHandler.playBackground("data/orbital_colossus.wav");
 		Thread t = new Thread(this);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
 		t.start();
 		// super.start();
@@ -190,9 +193,8 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	@Override
 	public void run() {
-		if (state == GameState.Running) {
-			while (true) {
-				if(enemies.size() == 0) {
+		while(state == GameState.Running) {
+			  if(enemies.size() == 0) {
 					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
 						enemies.add(e);
 						BasicSprite enemySprite = e.getSprite();
@@ -228,7 +230,12 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 				if (spaceship.getCenterY() > 640) {
 					spaceship.setCenterY(640);
 				}
-			}
+				if(spaceship.getCenterX() < 0){
+					spaceship.setCenterX(0);
+				}
+				else if(spaceship.getCenterX() > 480){
+					spaceship.setCenterX(480);
+				}
 		}
 	}
 	
@@ -279,9 +286,31 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
-			g.drawString("Dead", 360, 240);
-
-
+			g.drawString("Dead", 200, 30);
+			g.drawString("Score Board", 200, 60);
+			if(!hasSubmited) {
+				scoreBoard.addScore(score);
+				scoreBoard.saveScores();
+				hasSubmited = true;
+			}
+			int i = 0;
+			for(Integer s : scoreBoard.getList()) {
+				if(i >= scoreBoard.getList().size()) {
+					break;
+				}
+				g.drawString(i + ": " + s.toString(), 200, 90 + 30 * i);
+				i ++;
+				if(i == 10) {
+					break;
+				}
+			}
+			g.drawString("Dead", WIDTH/2, 240);
+		}else{
+			scoreBoard.addScore(score);
+			scoreBoard.saveScores();
+			String top10 = scoreBoard.getN(10);
+			g.drawString(top10, 320, 100);
+			
 		}
 	}
 
@@ -375,6 +404,9 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 
 	public static void setGameState(GameState newState){
 		state=newState;
+		if(state==GameState.Dead){
+			AudioHandler.stopBackgroundMusic();
+		}
 	}
 	
 	public static void addToScore(){

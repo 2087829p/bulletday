@@ -20,7 +20,7 @@ import javafx.util.Duration;
 
 public class AudioHandler {
 	static Mp3Player mp3=new Mp3Player();
-	
+	static WavPlayer mainPlayer;
 	public static synchronized void playSound(String wav) {
 		  Thread t=new Thread(new WavPlayer(wav));
 		  t.start();		  
@@ -30,6 +30,14 @@ public class AudioHandler {
 	}	
 	public static void changeTrack(String mp3_file){
 		mp3.switchTrack(mp3_file);
+	}
+	public static void playBackground(String wav){
+    	mainPlayer=new WavPlayer(wav);
+    	Thread t=new Thread(mainPlayer);
+    	t.start();
+    }
+	public static void stopBackgroundMusic(){
+		mainPlayer.stop();
 	}
 	
 }
@@ -53,6 +61,7 @@ class Mp3Player extends Application{
 	    	stop();
 	    	playMedia(mp3);	    	
 	    }
+	    
 		@Override
 		public void start(Stage arg0) throws Exception {
 			// TODO Auto-generated method stub
@@ -62,13 +71,14 @@ class Mp3Player extends Application{
 class WavPlayer implements Runnable,LineListener{
 	boolean is_playing;
 	String sound;
+	Clip clip;
 	public WavPlayer(String sound){
 		this.sound=sound;
 	}
 	public void run(){
 		try{
 			File audioFile=new File(sound);
-	        Clip clip = AudioSystem.getClip();
+	        clip = AudioSystem.getClip();
 	        AudioInputStream inputStream = AudioSystem.getAudioInputStream(audioFile);
 	        AudioFormat format=inputStream.getFormat();
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
@@ -79,12 +89,12 @@ class WavPlayer implements Runnable,LineListener{
 	        while (is_playing) {
 				// wait for the playback completes
 				try {
-					//Thread.sleep(1000);
-					wait();
+					Thread.sleep(1000);
+					//wait();
 				} catch (InterruptedException ex) {
 					ex.printStackTrace();
 				}
-			}			
+			}				        
 			audioClip.close();
 		} catch (UnsupportedAudioFileException ex) {
 			System.out.println("The specified audio file is not supported.");
@@ -97,6 +107,11 @@ class WavPlayer implements Runnable,LineListener{
 			ex.printStackTrace();
 		}
 	}	
+	public void stop(){
+		is_playing=false;
+		clip.stop();
+		clip.close();
+	}
 	@Override
 	public synchronized void update(LineEvent event) {
 		LineEvent.Type type = event.getType();		

@@ -71,6 +71,13 @@ public class Enemy extends Entity {
 		if(centerY + this.sprite.height > 640){
         	die();
         }
+		if(centerX < 0){
+			centerX = 0;
+		}
+		else if(centerX+this.sprite.width > 480){
+			centerX = 480 - this.sprite.width;
+		}
+		
 		if(updateCount % rateOfFire == 0) {
 			shoot();
 			updateCount = 100 - rateOfFire;
@@ -122,7 +129,7 @@ public class Enemy extends Entity {
 	}
 	public void die() {
 		MainClass.enemies.remove(this);
-		//AudioHandler.playSound("data/explodemini.wav");
+		AudioHandler.playSound("data/explodemini.wav");
 	}
 
 	public Background getBg() {
