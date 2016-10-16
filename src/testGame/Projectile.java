@@ -24,7 +24,7 @@ public class Projectile extends Entity{
 	public void update() {
 		super.update();
 		this.sprite.shape.setBounds(this.centerX,this.centerY,10,5);
-		if(this.centerY >= GameMap.BOX_HIEGHT || this.centerY <= 0) {
+		if(this.centerY >= GameMap.BOX_HIEGHT-30 || this.centerY <= 0) {
 			die();
 		}
 		this.checkCollision();
