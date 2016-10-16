@@ -75,7 +75,9 @@ public class Character extends Entity{
 	
 	public void setHealth(int health){
 		if(health<0){
+			noProjectiles = 1;
 			MainClass.resetMultiplier();
+			
 		}
 		this.health+=health;
 		if(this.health<=0){

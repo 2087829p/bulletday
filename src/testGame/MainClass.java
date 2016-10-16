@@ -47,7 +47,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private Animation anim, hanim;
 	private static Background bg1, bg2;
 	public static Image tilegrassTop, tilegrassBot, tilegrassLeft,
-			tilegrassRight, tiledirt, space_heart;
+			tilegrassRight, tiledirt, space_heart, gameOver;
 	public static List<Enemy> enemies=new ArrayList<Enemy>();
 	public static List<Enemy> enemies_in_scene=new ArrayList<Enemy>();
 	private ArrayList<Tile> tilearray = new ArrayList<Tile>();
@@ -66,7 +66,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		splashScreen();
 
 		setSize(480, 640);
-		setBackground(Color.BLACK);
+		setBackground(Color.WHITE);
 		setFocusable(true);
 		addKeyListener(this);
 		Frame f = (Frame) this.getParent().getParent();
@@ -88,6 +88,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		tilegrassLeft = getImage(base, "data/tilegrassleft.png");
 		tilegrassRight = getImage(base, "data/tilegrassright.png");
 		space_heart = getImage(base, "data/space_heart2.png");
+		gameOver = getImage(base, "data/gameover.png");
 
 		anim = new Animation();
 		
@@ -324,25 +325,27 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		////////////////////////////////
 		
 		} else if (state == GameState.Dead) {
-			g.setColor(Color.BLACK);
+			g.setColor(Color.WHITE);
 			g.fillRect(0, 0, 800, 480);
 			g.setColor(Color.WHITE);
-			g.drawString("Dead", 200, 30);
-			g.drawString("Score Board", 200, 60);
+			g.drawImage(gameOver, 100, 100, this);
+			Font tempFont = new Font("TimesRoman", Font.BOLD, 20);
+			g.setFont(tempFont);
+			g.drawString("Your Score: " + score , 200, 440);
 			if(!hasSubmited) {
 				scoreBoard.addScore(score);
 				scoreBoard.saveScores();
 				hasSubmited = true;
 			}
 			int i = 0;
-			g.drawString("Your Score: " + score + "", 200, 90);
+			g.drawString("Score board : ", 200, 480);
 			for(Integer s : scoreBoard.getList()) {
 				if(i >= scoreBoard.getList().size()) {
 					break;
 				}
-				g.drawString((i + 1) + ": " + s.toString(), 200, 120 + 30 * i);
+				g.drawString((i + 1) + ": " + s.toString(), 200, 500 + 20 * i);
 				i ++;
-				if(i == 10) {
+				if(i == 3) {
 					break;
 				}
 			}
