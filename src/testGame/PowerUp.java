@@ -3,9 +3,6 @@ package testGame;
 import java.util.Random;
 
 public class PowerUp extends Entity{
-	private int centerX;
-	private int centerY;
-	private int speedY;
 	private Character theCharacter = MainClass.getCharacter();
 	Random r = new Random();
 	private int typeOfPU;
@@ -20,10 +17,11 @@ public class PowerUp extends Entity{
 	
 	public void update(){
 		super.update();
+		sprite.move(centerX, centerY, sprite.width, sprite.height);
 		if(this.centerY > 640){
 			die();
 		}
-		if(collides(theCharacter)){
+		if(sprite.collides(MainClass.getCharacter().sprite)){
 			System.out.println("Collided");
 			switch(typeOfPU){
 			case 0: //theCharacter.incDamage();
