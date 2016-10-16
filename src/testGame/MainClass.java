@@ -285,6 +285,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 		for(int i = 0; i < powerups.size(); i++){
 			PowerUp p = (PowerUp) powerups.get(i);
 			g.drawImage(p.getSprite().getSprite(), p.getCenterX(), p.getCenterY(), this);
+			g.drawRect(p.sprite.shape.x, p.sprite.shape.y, p.sprite.shape.width, p.sprite.shape.height);
 		}
 		//ADD DRAW SPRITE HERE
 		
