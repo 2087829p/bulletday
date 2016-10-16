@@ -36,7 +36,7 @@ public class BasicSprite {
     	rng = new Random();
     	for(String dataRef : enemyProjectileSprites){
 			try {
-				System.out.println(dataRef);
+				//System.out.println(dataRef);
 	            BufferedImage tempSprite = ImageIO.read(new File(dataRef));
 	            enemyProjectileImages.add(tempSprite);
 	        } catch (IOException e) {

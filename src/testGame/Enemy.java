@@ -43,6 +43,7 @@ public class Enemy extends Entity {
     	case 2:
     		angle[0] =  (Math.PI/6) + 3 * Math.PI / 2;
     		angle[1] = -(Math.PI/6) + 3 * Math.PI / 2;
+    		System.out.println(angle.length);
     		break;
     	default:
 			for(int i = 0; i < numOfBullets; i ++) {
