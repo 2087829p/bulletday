@@ -41,7 +41,7 @@ public class Character extends Entity{
                 for(int i = 0; i < noProjectiles; i ++) {
                     int mid = noProjectiles/2;
                     projectiles.add(new PlayerProjectile(centerX, centerY - sprite.getShape().height,
-                    speedX + ((mid - i) % mid )- mid, 15 - mid + (mid - i) % mid)); // Gives some spread 
+                    speedX + ((mid - i) % mid )- mid, -15)); // Gives some spread 
                 }
             }
 		    AudioHandler.playSound("data/laser12.wav");
@@ -50,11 +50,15 @@ public class Character extends Entity{
 	}
 	
 	public void incSpeed() {
-		this.MOVESPEED += 5;
+		this.MOVESPEED = Math.min(10, MOVESPEED+2);
 	}
 	
 	public void incProjNum() {
 		this.noProjectiles = Math.min(16, noProjectiles + 1);
+	}
+	
+	public void incHealth(){
+		this.health = Math.min(10, health+1);
 	}
 	
 	@Override
