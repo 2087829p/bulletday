@@ -8,6 +8,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 import javax.sound.sampled.LineEvent;
 import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
@@ -22,7 +23,7 @@ public class AudioHandler {
 	static Mp3Player mp3=new Mp3Player();
 	static WavPlayer mainPlayer;
 	public static synchronized void playSound(String wav) {
-		  Thread t=new Thread(new WavPlayer(wav));
+		  Thread t=new Thread(new WavPlayer(wav,1f));
 		  t.start();		  
 	}
 	public static void playMusic(String mp3_file){
@@ -32,7 +33,7 @@ public class AudioHandler {
 		mp3.switchTrack(mp3_file);
 	}
 	public static void playBackground(String wav){
-    	mainPlayer=new WavPlayer(wav);
+    	mainPlayer=new WavPlayer(wav,0.2f);
     	Thread t=new Thread(mainPlayer);
     	t.start();
     }
@@ -71,9 +72,11 @@ class Mp3Player extends Application{
 class WavPlayer implements Runnable,LineListener{
 	boolean is_playing;
 	String sound;
+	float volume;
 	Clip clip;
-	public WavPlayer(String sound){
+	public WavPlayer(String sound,float volume){
 		this.sound=sound;
+		this.volume=volume;
 	}
 	public void run(){
 		try{
@@ -84,7 +87,9 @@ class WavPlayer implements Runnable,LineListener{
 			DataLine.Info info = new DataLine.Info(Clip.class, format);
 			Clip audioClip = (Clip) AudioSystem.getLine(info);
 			audioClip.addLineListener(this);
-	        clip.open(inputStream);
+			clip.open(inputStream);
+		    FloatControl volume_control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+			volume_control.setValue(volume);
 	        clip.start();
 	        while (is_playing) {
 				// wait for the playback completes
@@ -107,6 +112,11 @@ class WavPlayer implements Runnable,LineListener{
 			ex.printStackTrace();
 		}
 	}	
+	public void changeVolume(float a){
+		volume=a;
+		FloatControl volume_control = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+		volume_control.setValue(volume);
+	}
 	public void stop(){
 		is_playing=false;
 		clip.stop();
