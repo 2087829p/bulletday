@@ -2,6 +2,8 @@ package testGame;
 
 import java.util.Random;
 
+import framework.AudioHandler;
+
 public class PowerUp extends Entity{
 	private Character theCharacter = MainClass.getCharacter();
 	Random r = new Random();
@@ -31,6 +33,7 @@ public class PowerUp extends Entity{
 			case 2: theCharacter.incSpeed();
 					break;
 			}
+			AudioHandler.playSound("data/flagreturn.wav");	
 			die();
 		}
 		
