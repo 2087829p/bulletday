@@ -38,9 +38,9 @@ public class Character extends Entity{
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];
                 for(int i = 0; i < noProjectiles; i ++) {
-                    int mid = noProjectiles;
+                    int mid = (noProjectiles + 1) * 5;
                     projectiles.add(new PlayerProjectile(sprite.shape.x + sprite.shape.width/2, centerY - sprite.getShape().height,
-                    speedX + ((mid - i) % mid )- mid, -15)); // Gives some spread 
+                    		(10 * (i + 1) - mid), -15)); // Gives some spread 
                 }
             }
 		    AudioHandler.playSound("data/laser12.wav");
