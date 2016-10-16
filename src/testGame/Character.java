@@ -65,7 +65,7 @@ public class Character extends Entity{
 	public void update(){
 		super.update();
 		int p = 0;
-		this.sprite.move(centerX-60, centerY-65, 100, 40);
+		this.sprite.move(centerX-60, centerY-65, sprite.width, sprite.height);
 		while(p < projectiles.size()) {
 			int start_size = projectiles.size();
 			projectiles.get(p).update();
