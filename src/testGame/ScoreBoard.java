@@ -25,13 +25,20 @@ public class ScoreBoard {
 				} catch (Exception e){
 					e.printStackTrace();
 				}
-				while(l == "") {
-					scores.add(new Integer(l));
+				while(l != "" && l != null) {
+					System.out.println(l);
 					try {
+						scores.add(new Integer(Integer.parseInt(l)));
 						l = r.readLine();
 					} catch (Exception e){
 						e.printStackTrace();
 					}
+				}
+				System.out.println(scores.toString());
+				try {
+				r.close();
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -39,6 +46,7 @@ public class ScoreBoard {
 	public void addScore(int score) {
 		scores.add(new Integer(score));
 		Collections.sort(scores);
+		Collections.reverse(scores);
 	}
 	
 	public String toString() {
@@ -65,6 +73,7 @@ public class ScoreBoard {
 			r = new BufferedWriter(new FileWriter(FILENAME));
 			r.write(sb);
 			System.out.println(sb);
+			r.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
