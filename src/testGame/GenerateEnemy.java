@@ -59,6 +59,10 @@ public class GenerateEnemy {
     public static List<Point> gen_path(Point p){
     	List<Point> path=new ArrayList<Point>();
     	path.add(new Point(MainClass.getCharacter().centerX,MainClass.getCharacter().centerY));
+    	int num_points=rng.nextInt(5)+1;
+    	for(int i=0;i<num_points;i++){
+    		path.add(new Point(Math.max(rng.nextInt(GameMap.BOX_WIDTH-40),20),Math.max(rng.nextInt(GameMap.BOX_HIEGHT-60),30)));
+    	}
     	path.add(p);
     	return path;
     }

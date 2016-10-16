@@ -186,5 +186,9 @@ public class Character extends Entity{
 	public void setMovingForward(boolean movingForward) {
 		this.movingForward = movingForward;		
 	}
+	
+	public int getMovespeed(){
+		return MOVESPEED;
+	}
 
 }

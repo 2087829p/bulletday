@@ -13,14 +13,18 @@ public class PowerUp extends Entity{
 	
 	public PowerUp(int centerX, int centerY){
 		super(centerX, centerY, new PowerUpSprite(centerX, centerY));
-		this.setSpeedY(5);
+		this.setSpeedY(theCharacter.getMovespeed()/2);
 		typeOfPU = r.nextInt(3);
 	}
-	
+
 	
 	public void update(){
 		super.update();
+		if(this.centerY > 640){
+			die();
+		}
 		if(collides(theCharacter)){
+			System.out.println("Collided");
 			switch(typeOfPU){
 			case 0: //theCharacter.incDamage();
 					break;
@@ -35,6 +39,6 @@ public class PowerUp extends Entity{
 	}
 	
 	public void die(){
-		
+		MainClass.powerups.remove(this);
 	}
 }
