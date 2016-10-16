@@ -30,7 +30,7 @@ public class GenerateEnemy {
         if(rng == null) {}
         int count = rng.nextInt(Math.min(difficulty, 6))+1;
         int power = difficulty/count;
-        int bullets = generate_num(power);
+        int bullets = generate_num(Math.min(power, 5));
         power=Math.max(1, power-bullets);
         int speed = generate_num(Math.min(power, 8));
         power=Math.max(1, power-speed);
