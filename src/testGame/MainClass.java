@@ -197,7 +197,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	public void run() {
 		while(state == GameState.Running) {
 			  if(enemies.size() == 0) {
-					for(Enemy e : GenerateEnemy.group_enemy(3 + (score/100))){
+					for(Enemy e : GenerateEnemy.group_enemy(3 + Math.max(0, (int)Math.log10(score)))){
 						enemies.add(e);
 						BasicSprite enemySprite = e.getSprite();
 						Image enemyImage = enemySprite.getSprite();
