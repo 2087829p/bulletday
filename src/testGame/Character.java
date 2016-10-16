@@ -30,7 +30,6 @@ public class Character extends Entity{
     }
 	
 	public void shoot() {
-		System.out.println(delay);
 		if (isReadyToFire()) {
             if(noProjectiles == 1) {
     			Projectile p = new PlayerProjectile(centerX, 
@@ -39,7 +38,7 @@ public class Character extends Entity{
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];
                 for(int i = 0; i < noProjectiles; i ++) {
-                    int mid = noProjectiles/2;
+                    int mid = noProjectiles;
                     projectiles.add(new PlayerProjectile(centerX, centerY - sprite.getShape().height,
                     speedX + ((mid - i) % mid )- mid, -15)); // Gives some spread 
                 }
