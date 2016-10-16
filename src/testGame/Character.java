@@ -38,7 +38,7 @@ public class Character extends Entity{
             } else {
                 Projectile[] p = new PlayerProjectile[noProjectiles];
                 for(int i = 0; i < noProjectiles; i ++) {
-                    int mid = noProjectiles/2;
+                    int mid = noProjectiles;
                     projectiles.add(new PlayerProjectile(sprite.shape.x + sprite.shape.width/2, centerY - sprite.getShape().height,
                     speedX + ((mid - i) % mid )- mid, -15)); // Gives some spread 
                 }
@@ -53,7 +53,7 @@ public class Character extends Entity{
 	}
 	
 	public void incProjNum() {
-		this.noProjectiles = Math.min(16, noProjectiles + 1);
+		this.noProjectiles = Math.min(4, noProjectiles + 1);
 	}
 	
 	public void incHealth(){
