@@ -1,5 +1,6 @@
 package testGame;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import framework.AudioHandler;
@@ -7,6 +8,7 @@ import framework.AudioHandler;
 public class PowerUp extends Entity{
 	private Character theCharacter = MainClass.getCharacter();
 	Random r = new Random();
+	private ArrayList<String> powerupsActive;
 	private int typeOfPU;
 	
 	
@@ -24,19 +26,26 @@ public class PowerUp extends Entity{
 			die();
 		}
 		if(sprite.collides(MainClass.getCharacter().sprite)){
-			System.out.println("Collided");
 			switch(typeOfPU){
 			case 0: theCharacter.incHealth();
+					MainClass.addToActivePowerups("Increased health by 1!");
 					break;
 			case 1: theCharacter.incProjNum();
+					MainClass.addToActivePowerups("Increased Number of Projectiles!");
 					break;
 			case 2: theCharacter.incSpeed();
+					MainClass.addToActivePowerups("Increased speed!");
 					break;
 			}
+			
 			AudioHandler.playSound("data/flagreturn.wav");	
 			die();
 		}
 		
+	}
+	
+	public ArrayList<String> getActivePowers(){
+		return powerupsActive;
 	}
 	
 	public void die(){

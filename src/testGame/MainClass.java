@@ -54,6 +54,7 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	private Font font = new Font("TimesRoman", Font.BOLD, 30);
 	public static List<PlayerProjectile> player_projectiles;
 	public static ArrayList<PowerUp> powerups= new ArrayList<PowerUp>();
+	public static ArrayList<String> powerupsActive = new ArrayList<String>();
 	public Random r = new Random();
 	@Override
 	public void init() {
@@ -306,6 +307,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 			g.drawImage(space_heart, (100 + i*30), 50, this);
 		}
 		
+		for(String powerUp : powerupsActive){
+			g.drawString(powerUp, 100, 100);
+		}
+		
 		} else if (state == GameState.Dead) {
 			g.setColor(Color.BLACK);
 			g.fillRect(0, 0, 800, 480);
@@ -434,6 +439,10 @@ public class MainClass extends Applet implements Runnable, KeyListener {
 	
 	public static void resetMultiplier(){
 		multiplier = 1;
+	}
+	
+	public static void addToActivePowerups(String pup){
+		powerupsActive.add(pup);
 	}
 
 }
